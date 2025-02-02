@@ -1,28 +1,37 @@
 package com.example.MaslyakBank_client.domain;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
+
+import jakarta.persistence.*;
 
 
 @Entity
+@Table(name = "bank_user_balance")
 public class UserBalanceTable {
 
     public UserBalanceTable() {
     }
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Генерация ID
+    private Integer id;
+    @Column(name = "user_id")
     private Integer user_id;
-    private String balance;
+    @Column(name = "balance_usd")
+    private String balance_usd;
 
-    public String getBalance() {
-        return balance;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBalance(String balance) {
-        this.balance = balance;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getBalance_usd() {
+        return balance_usd;
+    }
+
+    public void setBalance_usd(String balance_usd) {
+        this.balance_usd = balance_usd;
     }
 
     public Integer getUser_id() {
@@ -32,4 +41,5 @@ public class UserBalanceTable {
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
+
 }
