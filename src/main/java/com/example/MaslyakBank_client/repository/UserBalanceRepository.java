@@ -14,4 +14,5 @@ public interface UserBalanceRepository extends JpaRepository<UserBalanceTable, I
     @Query("SELECT u.balance_usd FROM UserBalanceTable u WHERE u.user_id = :userId")
     Optional<String> findBalanceByUserId(@Param("userId") Integer userId);
 
+
 }

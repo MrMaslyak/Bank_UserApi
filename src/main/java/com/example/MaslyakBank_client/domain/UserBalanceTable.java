@@ -11,7 +11,7 @@ public class UserBalanceTable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Генерация ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "user_id")
     private Integer user_id;
