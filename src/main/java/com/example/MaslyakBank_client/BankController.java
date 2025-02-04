@@ -1,6 +1,5 @@
 package com.example.MaslyakBank_client;
 
-import com.example.MaslyakBank_client.domain.UserBalanceTable;
 import com.example.MaslyakBank_client.repository.UserBalanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
