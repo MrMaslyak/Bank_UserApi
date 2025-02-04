@@ -23,10 +23,10 @@ public class GreetingController {
 
     @GetMapping("/money/{userId}")
     public String getBalance(@PathVariable int userId, Model model) {
-        Optional<UserBalanceTable> userBalance = userBalanceRepository.findBalanceByUserId(userId);
+        Optional<String> userBalance = userBalanceRepository.findBalanceByUserId(userId);
 
         if (userBalance.isPresent()) {
-            model.addAttribute("balance_usd", userBalance.get().getBalance_usd());
+            model.addAttribute("balance_usd", userBalance.get());
         } else {
             model.addAttribute("balance_usd", "Пользователь не найден");
         }
