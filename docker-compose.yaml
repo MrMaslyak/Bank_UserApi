@@ -5,11 +5,11 @@ services:
     container_name: bank_spring
     restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://172.22.0.2:5432/postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: LaLa27418182
     ports:
-      - "8080:8080"
+      - "5000:8080"
     networks:
       - MNBank
 
