@@ -1,5 +1,6 @@
 package com.example.MaslyakBank_client;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -14,7 +15,7 @@ public class MaslyakBankClientApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MaslyakBankClientApplication.class, args);
-		System.out.println("Hello Word");
+		System.out.println("COMPLETE I WORK");
 	}
 
 }
