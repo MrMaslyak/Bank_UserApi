@@ -23,8 +23,8 @@ public class BankController {
         return "Home Page MBank";
     }
 
-    @GetMapping("/money")
-    public List<UserDataDTO> getBalance(@RequestParam("user_id") List<Integer> userIds) {
-        return serviceMBank.getBalance(userIds);
+    @GetMapping("/data")
+    public List<UserDataDTO> getDataUsers(@RequestParam("user_id") List<Integer> userIds) {
+        return serviceMBank.getUsersData(userIds);
     }
 }

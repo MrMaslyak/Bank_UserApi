@@ -13,7 +13,7 @@ public class UsersTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer user_id;
 
     @Column(name = "login")
     private String login;
