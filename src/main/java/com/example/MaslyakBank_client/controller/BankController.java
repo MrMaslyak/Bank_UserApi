@@ -1,5 +1,6 @@
 package com.example.MaslyakBank_client.controller;
 
+import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
 import com.example.MaslyakBank_client.service.ServiceMBank;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,12 @@ public class BankController {
     }
 
     @GetMapping("/data")
-    public List<UserDataDTO> getDataUsers(@RequestParam("user_id") List<Integer> userIds) {
-        return serviceMBank.getUsersData(userIds);
+    public List<UserDataBalanceDTO> getDataBalanceUsers(@RequestParam("user_id") List<Integer> userIds) {
+        return serviceMBank.getUsersBalanceData(userIds);
+    }
+
+    @GetMapping("/users")
+    public List<UserDataDTO> getDataUsers() {
+        return serviceMBank.getUsersData();
     }
 }

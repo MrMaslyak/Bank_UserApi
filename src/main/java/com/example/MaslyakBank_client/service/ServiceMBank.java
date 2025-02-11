@@ -1,6 +1,8 @@
 package com.example.MaslyakBank_client.service;
 
 
+import com.example.MaslyakBank_client.domain.UsersTable;
+import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
 import com.example.MaslyakBank_client.repository.UserBalanceRepository;
 import com.example.MaslyakBank_client.repository.UsersRepository;
@@ -20,16 +22,29 @@ public class ServiceMBank {
     private final UsersRepository usersRepository;
 
 
-    public List<UserDataDTO> getUsersData(List<Integer> userIds) {
+    public List<UserDataBalanceDTO> getUsersBalanceData(List<Integer> userIds) {
 
-        List<UserDataDTO> dtoList = new ArrayList<>();
+        List<UserDataBalanceDTO> dtoList = new ArrayList<>();
         for (int userId : userIds) {
             Optional<String> userBalance = userBalanceRepository.findBalanceByUserId(userId);
             Optional<String> userLogin = usersRepository.findLoginByUserId(userId);
-            UserDataDTO userDataDTO = new UserDataDTO();
+            UserDataBalanceDTO userDataDTO = new UserDataBalanceDTO();
             userDataDTO.setUserId(userId);
             userDataDTO.setLogin(userLogin.orElse("User not regist in system"));
             userDataDTO.setBalance(userBalance.orElse("User not regist in system"));
+            dtoList.add(userDataDTO);
+        }
+        return dtoList;
+    }
+
+    public List<UserDataDTO> getUsersData() {
+        List<UserDataDTO> dtoList = new ArrayList<>();
+        List<UsersTable> usersList = usersRepository.findAll();
+        for (UsersTable user : usersList) {
+            UserDataDTO userDataDTO = new UserDataDTO();
+            userDataDTO.setUserId(user.getUser_id());
+            userDataDTO.setLogin(user.getLogin());
+            userDataDTO.setEmail(user.getEmail());
             dtoList.add(userDataDTO);
         }
         return dtoList;
