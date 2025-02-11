@@ -1,4 +1,4 @@
-package com.example.MaslyakBank_client.controller;
+package com.example.MaslyakBank_client.controller.Versions;
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class BankController {
+public class BankControllerV1 {
 
     private final ServiceMBank serviceMBank;
 
