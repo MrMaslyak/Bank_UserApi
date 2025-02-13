@@ -2,7 +2,7 @@ package com.example.MaslyakBank_client.controller.Versions;
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
-import com.example.MaslyakBank_client.service.ServiceMBank;
+import com.example.MaslyakBank_client.service.ServiceV1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class BankControllerV1 {
 
-    private final ServiceMBank serviceMBank;
+    private final ServiceV1 serviceV1;
 
 
     @GetMapping("/")
@@ -26,11 +26,12 @@ public class BankControllerV1 {
 
     @GetMapping("/data")
     public List<UserDataBalanceDTO> getDataBalanceUsers(@RequestParam("user_id") List<Integer> userIds) {
-        return serviceMBank.getUsersBalanceData(userIds);
+        return serviceV1.getUsersBalanceData(userIds);
     }
 
     @GetMapping("/users")
     public List<UserDataDTO> getDataUsers() {
-        return serviceMBank.getUsersData();
+        return serviceV1.getUsersData();
     }
+
 }
