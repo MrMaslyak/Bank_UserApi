@@ -20,4 +20,7 @@ public class UsersTable {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "disabled")
+    private boolean disabled;
 }

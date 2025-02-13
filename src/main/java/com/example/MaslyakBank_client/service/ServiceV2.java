@@ -12,5 +12,10 @@ public class ServiceV2  extends BaseService {
         super(userBalanceRepository, usersRepository);
     }
 
+    public String updateUserDisabled(int userId, boolean disabled) {
+        usersRepository.setDisabled(userId, disabled);
+        return "User: " + userId + " disabled: " + disabled;
+    }
+
 
 }

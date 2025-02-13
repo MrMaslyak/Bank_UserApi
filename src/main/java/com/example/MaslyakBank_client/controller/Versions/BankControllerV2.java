@@ -21,4 +21,9 @@ public class BankControllerV2 {
         return serviceV2.getUsersBalanceData(userIds);
     }
 
+    @GetMapping("/setDisabled")
+    public String updateUserDisabled(@RequestParam("user_id") int userId, @RequestParam("disabled") boolean  disabled ) {
+        return serviceV2.updateUserDisabled(userId, disabled);
+    }
+
 }
