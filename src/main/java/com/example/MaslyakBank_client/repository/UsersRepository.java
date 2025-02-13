@@ -28,4 +28,6 @@ public interface UsersRepository extends JpaRepository<UsersTable, Integer> {
     @Override
     List<UsersTable> findAll();
 
+    @Override
+    List<UsersTable> findAllById(Iterable<Integer> integers);
 }
