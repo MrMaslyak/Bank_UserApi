@@ -22,7 +22,7 @@ public interface UsersRepository extends JpaRepository<UsersTable, Integer> {
     @Transactional
     @Modifying
     @Query("UPDATE UsersTable u SET u.disabled = :disabled WHERE u.user_id = :userId")
-    int setDisabled(@Param("userId") Integer userId, @Param("disabled") boolean disabled);
+    void setDisabled(@Param("userId") Integer userId, @Param("disabled") boolean disabled);
 
 
     @Override
