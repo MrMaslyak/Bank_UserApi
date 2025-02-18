@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 public class UserRequestDTO {
 
-    private List<Integer> userId;
+    private List<Integer> users_id;
     private List<String> login;
 }

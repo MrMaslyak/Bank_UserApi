@@ -27,14 +27,14 @@ public class BankControllerV2 {
         return serviceV2.updateUserDisabled(userId, disabled);
     }
 
-    @PostMapping("/data_body")
-    public List<UserDataBalanceDTO> getDataBalanceUsersBodyFromId(@RequestBody UserRequestDTO userId) {
-        return serviceV2.getUsersByBodyFromId(userId.getUserId());
+    @PostMapping("/data_body/id")
+    public List<UserDataBalanceDTO> getDataBalanceUsersBodyFromId(@RequestBody UserRequestDTO users_id) {
+        return serviceV2.getUsersByBodyFromId(users_id.getUsers_id());
     }
 
     @PostMapping("/data_body/login")
     public List<UserDataBalanceDTO> getDataBalanceUsersBodyFromLogin(@RequestBody UserRequestDTO login) {
-        return serviceV2.getUsersByBodyFromLogin(login.getLogin());
+            return serviceV2.getUsersByBodyFromLogin(login.getLogin());
     }
 
 
