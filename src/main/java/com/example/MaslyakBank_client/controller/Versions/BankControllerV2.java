@@ -29,8 +29,8 @@ public class BankControllerV2 {
     }
 
     @PostMapping("/data_body")
-    public List<UserDataBalanceDTO> getDataBalanceUsersBody(@RequestBody UserIdRequestDTO userIds) {
-        return serviceV2.getUsersByBody(userIds.getUserId());
+    public List<UserDataBalanceDTO> getDataBalanceUsersBody(@RequestBody UserIdRequestDTO userId) {
+        return serviceV2.getUsersByBody(userId.getUserId());
     }
 
 

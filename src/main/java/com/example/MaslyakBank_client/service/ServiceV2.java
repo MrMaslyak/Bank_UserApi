@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -26,12 +25,12 @@ public class ServiceV2  extends BaseService {
     public List<UserDataBalanceDTO> getUsersByBody(List<Integer> userIds) {
 
         List<UsersTable> users = usersRepository.findAllById(userIds);
-        List dtoList = new ArrayList<>();
-        for (Object user : users) {
+        List<UserDataBalanceDTO>  dtoList = new ArrayList<>();
+        for (UsersTable user : users) {
             UserDataBalanceDTO userDataDTO = new UserDataBalanceDTO();
-            userDataDTO.setUserId(((UsersTable) user).getUser_id());
-            userDataDTO.setLogin(((UsersTable) user).getLogin());
-            userDataDTO.setBalance(userBalanceRepository.findBalanceByUserId(((UsersTable) user).getUser_id()).orElse("User not regist in system"));
+            userDataDTO.setUserId(user.getUser_id());
+            userDataDTO.setLogin(user.getLogin());
+            userDataDTO.setBalance(userBalanceRepository.findBalanceByUserId(user.getUser_id()).orElse("User not regist in system"));
             dtoList.add(userDataDTO);
         }
         return dtoList;
