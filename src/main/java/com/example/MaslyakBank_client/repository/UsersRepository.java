@@ -18,6 +18,9 @@ public interface UsersRepository extends JpaRepository<UsersTable, Integer> {
     @Query("SELECT u.login FROM UsersTable u WHERE u.user_id = :userId")
     Optional<String> findLoginByUserId(@Param("userId") Integer userId);
 
+    @Query("SELECT u.user_id FROM UsersTable u WHERE u.login IN :logins")
+    List<String> findUserIdByLogin(@Param("logins") List<String> logins);
+
 
     @Transactional
     @Modifying
@@ -30,4 +33,6 @@ public interface UsersRepository extends JpaRepository<UsersTable, Integer> {
 
     @Override
     List<UsersTable> findAllById(Iterable<Integer> integers);
+
+
 }

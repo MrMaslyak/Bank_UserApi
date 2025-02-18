@@ -2,8 +2,7 @@ package com.example.MaslyakBank_client.controller.Versions;
 
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
-import com.example.MaslyakBank_client.dto.UserDataDTO;
-import com.example.MaslyakBank_client.dto.UserIdRequestDTO;
+import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.service.ServiceV2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +28,13 @@ public class BankControllerV2 {
     }
 
     @PostMapping("/data_body")
-    public List<UserDataBalanceDTO> getDataBalanceUsersBody(@RequestBody UserIdRequestDTO userId) {
-        return serviceV2.getUsersByBody(userId.getUserId());
+    public List<UserDataBalanceDTO> getDataBalanceUsersBodyFromId(@RequestBody UserRequestDTO userId) {
+        return serviceV2.getUsersByBodyFromId(userId.getUserId());
+    }
+
+    @PostMapping("/data_body/login")
+    public List<UserDataBalanceDTO> getDataBalanceUsersBodyFromLogin(@RequestBody UserRequestDTO login) {
+        return serviceV2.getUsersByBodyFromLogin(login.getLogin());
     }
 
 

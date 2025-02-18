@@ -6,7 +6,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class UserIdRequestDTO {
+public class UserRequestDTO {
 
     private List<Integer> userId;
+    private List<String> login;
 }
