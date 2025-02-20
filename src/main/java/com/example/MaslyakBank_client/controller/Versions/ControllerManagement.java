@@ -2,6 +2,7 @@ package com.example.MaslyakBank_client.controller.Versions;
 
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
+import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.service.ManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,9 @@ public class ControllerManagement {
         return accountManagement.getUserBalance(userIds);
     }
 
-    @GetMapping("/setStatus")
-    public String updateUserStatus(@RequestParam("user_id") int userId, @RequestParam("status") boolean  status ) {
-        return accountManagement.updateUserStatus(userId, status);
+    @PostMapping("/update_status")
+    public String updateUserStatus(@RequestBody UserRequestDTO userRequestDTO) {
+        return accountManagement.updateUserStatus(userRequestDTO.getUsers_id(), userRequestDTO.getIsStatus());
     }
 
 }

@@ -4,6 +4,8 @@ import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ManagementService extends ServiceCore {
@@ -12,9 +14,15 @@ public class ManagementService extends ServiceCore {
         super(userBalanceTableRepository, usersDataRepository);
     }
 
-    public String updateUserStatus(int userId, boolean status) {
-        usersDataRepository.setStatus(userId, status);
-        return "User: " + userId + " Status: " + status;
+    public String updateUserStatus(List<Integer> userIds, List<Boolean> status) {
+        try {
+            for (int i = 0; i < userIds.size(); i++) {
+                usersDataRepository.setStatus(userIds.get(i), status.get(i));
+            }
+            return "Status updated successfully";
+        } catch (Exception e) {
+            return "Error updating status: " + e.getMessage();
+        }
     }
 
 
