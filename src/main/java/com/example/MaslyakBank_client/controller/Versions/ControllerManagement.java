@@ -17,7 +17,7 @@ public class ControllerManagement {
     private final ManagementService accountManagement;
 
     @GetMapping("/user_balance")
-    public List<UserDataBalanceDTO> getBalanceUser(@RequestHeader("users_id") List<Integer> userIds) {
+    public List<UserDataBalanceDTO> getBalanceUser(@RequestHeader("user_id") List<Integer> userIds) {
         return accountManagement.getUserBalance(userIds);
     }
 

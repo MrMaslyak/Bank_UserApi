@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface UserBalanceTableRepository extends JpaRepository<UsersBalanceDataTable, Integer> {
 
-    @Query("SELECT u.balance_usd FROM UserBalanceDataTable u WHERE u.user_id = :userId")
+    @Query("SELECT u.balance_usd FROM UsersBalanceDataTable u WHERE u.user_id = :userId")
     Optional<String> findBalanceByUserId(@Param("userId") Integer userId);
 
 
