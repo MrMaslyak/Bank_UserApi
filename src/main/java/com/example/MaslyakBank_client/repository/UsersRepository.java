@@ -21,7 +21,6 @@ public interface UsersRepository extends JpaRepository<UsersTable, Integer> {
     @Query("SELECT u.user_id FROM UsersTable u WHERE u.login IN :logins")
     List<String> findUserIdByLogin(@Param("logins") List<String> logins);
 
-    Optional<UsersTable> findLoginByUserId(String login);
 
 
     @Transactional
