@@ -1,6 +1,6 @@
 package com.example.MaslyakBank_client.repository;
 
-import com.example.MaslyakBank_client.domain.UsersTable;
+import com.example.MaslyakBank_client.domain.UsersDataTable;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,28 +12,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UsersRepository extends JpaRepository<UsersTable, Integer> {
-
-
-    @Query("SELECT u.login FROM UsersTable u WHERE u.user_id = :userId")
-    Optional<String> findLoginByUserId(@Param("userId") Integer userId);
-
-    @Query("SELECT u.user_id FROM UsersTable u WHERE u.login IN :logins")
-    List<String> findUserIdByLogin(@Param("logins") List<String> logins);
-
-
+public interface UsersDataRepository extends JpaRepository<UsersDataTable, Integer> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE UsersTable u SET u.disabled = :disabled WHERE u.user_id = :userId")
-    void setDisabled(@Param("userId") Integer userId, @Param("disabled") boolean disabled);
+    @Query("UPDATE UsersDataTable u SET u.status = :status WHERE u.user_id = :userId")
+    void setStatus(@Param("userId") Integer userId, @Param("status") boolean status);
 
+    @Query("SELECT u.login FROM UsersDataTable u WHERE u.user_id = :userId")
+    Optional<String> findLoginByUserId(@Param("userId") Integer userId);
+
+    @Query("SELECT u.user_id FROM UsersDataTable u WHERE u.login IN :logins")
+    List<String> findUserIdByLogin(@Param("logins") List<String> logins);
 
     @Override
-    List<UsersTable> findAll();
+    List<UsersDataTable> findAll();
 
     @Override
-    List<UsersTable> findAllById(Iterable<Integer> integers);
+    List<UsersDataTable> findAllById(Iterable<Integer> integers);
 
 
 }

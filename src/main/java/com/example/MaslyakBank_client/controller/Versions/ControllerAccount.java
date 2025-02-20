@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("/bank/v1")
 public class ControllerAccount {
 
     private final AccountService account;
@@ -28,7 +28,5 @@ public class ControllerAccount {
     public List<UserDataDTO> getUsers() {
         return account.getUsers();
     }
-
-
 
 }
