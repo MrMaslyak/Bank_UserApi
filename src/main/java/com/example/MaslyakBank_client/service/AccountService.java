@@ -11,16 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ServiceV1 extends BaseService {
+public class AccountService  extends ServiceCore {
 
 
 
-    public ServiceV1(UserBalanceRepository userBalanceRepository, UsersRepository usersRepository) {
+    public AccountService (UserBalanceRepository userBalanceRepository, UsersRepository usersRepository) {
         super(userBalanceRepository, usersRepository);
     }
 
-
-    public List<UserDataDTO> getUsersData() {
+    public List<UserDataDTO> getUsers() {
         List<UserDataDTO> dtoList = new ArrayList<>();
         List<UsersTable> usersList = usersRepository.findAll();
         for (UsersTable user : usersList) {

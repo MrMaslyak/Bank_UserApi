@@ -11,12 +11,12 @@ import java.util.Optional;
 
 
 @RequiredArgsConstructor
-public abstract class BaseService {
+public abstract class ServiceCore {
 
     protected final UserBalanceRepository userBalanceRepository;
     protected final UsersRepository usersRepository;
 
-    public List<UserDataBalanceDTO> getUsersBalanceData(List<Integer> userIds) {
+    public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
         List<UserDataBalanceDTO> dtoList = new ArrayList<>();
         for (int userId : userIds) {
             Optional<String> userBalance = userBalanceRepository.findBalanceByUserId(userId);

@@ -2,7 +2,7 @@ package com.example.MaslyakBank_client.controller.Versions;
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
-import com.example.MaslyakBank_client.service.ServiceV1;
+import com.example.MaslyakBank_client.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,24 +14,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class BankControllerV1 {
+public class ControllerAccount {
 
-    private final ServiceV1 serviceV1;
+    private final AccountService account;
 
 
-    @GetMapping("/")
-    public String home() {
-        return "Home Page MBank";
-    }
-
-    @GetMapping("/data")
-    public List<UserDataBalanceDTO> getDataBalanceUsers(@RequestParam("user_id") List<Integer> userIds) {
-        return serviceV1.getUsersBalanceData(userIds);
+    @GetMapping("/user_balance")
+    public List<UserDataBalanceDTO> getUserBalance(@RequestParam("user_id") List<Integer> userIds) {
+        return account.getUserBalance(userIds);
     }
 
     @GetMapping("/users")
-    public List<UserDataDTO> getDataUsers() {
-        return serviceV1.getUsersData();
+    public List<UserDataDTO> getUsers() {
+        return account.getUsers();
     }
 
 
