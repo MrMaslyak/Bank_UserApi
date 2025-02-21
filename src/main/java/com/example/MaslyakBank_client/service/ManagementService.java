@@ -15,18 +15,7 @@ public class ManagementService extends ServiceCore {
         super(userBalanceTableRepository, usersDataRepository);
     }
 
-    public String updateUserStatus(List<Integer> userIds, List<Boolean> status) {
-        try {
-            for (int i = 0; i < userIds.size(); i++) {
-                usersDataRepository.setStatus(userIds.get(i), status.get(i));
-            }
-            return "Status updated successfully";
-        } catch (Exception e) {
-            return "Error updating status: " + e.getMessage();
-        }
-    }
-
-    public String updateUserStatusV2(List<UserRequestDTO> userData) {
+    public String updateUserStatus(List<UserRequestDTO> userData) {
         try {
             for (UserRequestDTO user : userData) {
                 usersDataRepository.setStatus(user.getUser_id(), user.isGetStatus());

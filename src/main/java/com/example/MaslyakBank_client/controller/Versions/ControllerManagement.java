@@ -23,12 +23,8 @@ public class ControllerManagement {
     }
 
     @PostMapping("/update_status")
-    public String updateUserStatus(@RequestBody UserRequestDTO userRequestDTO) {
-        return accountManagement.updateUserStatus(userRequestDTO.getUsers_id(), userRequestDTO.getIsStatus());
-    }
-    @PostMapping("/update_status_2")
-    public String updateUserStatusV2(@RequestBody List<UserRequestDTO> userRequestDTOList) {
-        return accountManagement.updateUserStatusV2(userRequestDTOList);
+    public String updateUserStatus(@RequestBody List<UserRequestDTO> userRequestDTOList) {
+        return accountManagement.updateUserStatus(userRequestDTOList);
     }
 
 

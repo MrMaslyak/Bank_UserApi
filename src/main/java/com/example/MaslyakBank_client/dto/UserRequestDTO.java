@@ -10,7 +10,6 @@ public class UserRequestDTO {
 
     private List<Integer> users_id;
     private List<String> login;
-    private List<Boolean> isStatus;
     private int user_id;
     private boolean getStatus;
 
