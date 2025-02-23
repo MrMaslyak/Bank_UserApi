@@ -29,6 +29,7 @@ public interface UsersDataRepository extends JpaRepository<UsersDataTable, Integ
     @Query("UPDATE UsersDataTable u SET u.email = :newEmail WHERE u.id = :userId")
     void changeEmail(@Param("userId") int userId, @Param("newEmail") String newEmail);
 
+
     @Query("SELECT u.login FROM UsersDataTable u WHERE u.id = :userId")
     Optional<String> findLoginByUserId(@Param("userId") Integer userId);
 

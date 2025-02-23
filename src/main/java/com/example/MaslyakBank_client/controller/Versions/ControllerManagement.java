@@ -37,5 +37,10 @@ public class ControllerManagement {
         return accountManagement.changeEmail(userRequestDTO.getUser_id(), userRequestDTO.getEmail());
     }
 
+    @DeleteMapping("/delete_user")
+    public String deleteUser(@RequestBody UserRequestDTO userRequestDTO) {
+        return accountManagement.deleteUserById(userRequestDTO.getUsers_id());
+    }
+
 
 }

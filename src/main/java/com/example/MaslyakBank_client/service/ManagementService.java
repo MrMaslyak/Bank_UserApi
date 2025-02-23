@@ -62,6 +62,17 @@ public class ManagementService extends ServiceCore {
         }
     }
 
+    public String deleteUserById(List<Integer> userIds) {
+        try {
+            for (int userId : userIds) {
+                usersDataRepository.deleteById(userId);
+            }
+            return "User deleted successfully";
+        } catch (Exception e) {
+            return "Error deleting user: " + e.getMessage();
+        }
+    }
+
 
 
 }
