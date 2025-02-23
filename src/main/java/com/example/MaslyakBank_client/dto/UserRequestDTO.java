@@ -9,7 +9,9 @@ import java.util.List;
 public class UserRequestDTO {
 
     private List<Integer> users_id;
-    private List<String> login;
+    private List<String> logins;
+    private String login;
+    private String email;
     private int user_id;
     private boolean getStatus;
 

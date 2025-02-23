@@ -22,7 +22,7 @@ public class AccountService  extends ServiceCore {
         List<UsersDataTable> usersList = usersDataRepository.findAll();
         for (UsersDataTable user : usersList) {
             UserDataDTO userDataDTO = new UserDataDTO();
-            userDataDTO.setUserId(user.getUser_id());
+            userDataDTO.setUserId(user.getId());
             userDataDTO.setLogin(user.getLogin());
             userDataDTO.setEmail(user.getEmail());
             dtoList.add(userDataDTO);

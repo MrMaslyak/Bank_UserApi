@@ -16,13 +16,23 @@ public interface UsersDataRepository extends JpaRepository<UsersDataTable, Integ
 
     @Transactional
     @Modifying
-    @Query("UPDATE UsersDataTable u SET u.status = :status WHERE u.user_id = :userId")
+    @Query("UPDATE UsersDataTable u SET u.status = :status WHERE u.id = :userId")
     void setStatus(@Param("userId") Integer userId, @Param("status") boolean status);
 
-    @Query("SELECT u.login FROM UsersDataTable u WHERE u.user_id = :userId")
+    @Transactional
+    @Modifying
+    @Query("UPDATE UsersDataTable u SET u.login = :newLogin WHERE u.id = :userId")
+    void changeLogin(@Param("userId") int userId, @Param("newLogin") String newLogin);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE UsersDataTable u SET u.email = :newEmail WHERE u.id = :userId")
+    void changeEmail(@Param("userId") int userId, @Param("newEmail") String newEmail);
+
+    @Query("SELECT u.login FROM UsersDataTable u WHERE u.id = :userId")
     Optional<String> findLoginByUserId(@Param("userId") Integer userId);
 
-    @Query("SELECT u.user_id FROM UsersDataTable u WHERE u.login IN :logins")
+    @Query("SELECT u.id FROM UsersDataTable u WHERE u.login IN :logins")
     List<String> findUserIdByLogin(@Param("logins") List<String> logins);
 
     @Override

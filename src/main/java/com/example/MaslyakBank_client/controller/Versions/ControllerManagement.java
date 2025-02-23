@@ -27,5 +27,15 @@ public class ControllerManagement {
         return accountManagement.updateUserStatus(userRequestDTOList);
     }
 
+    @PutMapping("/change_login")
+    public String changeLogin(@RequestBody UserRequestDTO userRequestDTO) {
+        return accountManagement.changeLogin(userRequestDTO.getUser_id(), userRequestDTO.getLogin());
+    }
+
+    @PatchMapping("/change_email")
+    public String changeEmail(@RequestBody UserRequestDTO userRequestDTO) {
+        return accountManagement.changeEmail(userRequestDTO.getUser_id(), userRequestDTO.getEmail());
+    }
+
 
 }
