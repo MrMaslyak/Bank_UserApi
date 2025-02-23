@@ -4,6 +4,7 @@ import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import org.springframework.stereotype.Service;
+import com.example.MaslyakBank_client.domain.UsersDataTable;
 
 import java.util.List;
 
@@ -64,14 +65,19 @@ public class ManagementService extends ServiceCore {
 
     public String deleteUserById(List<Integer> userIds) {
         try {
-            for (int userId : userIds) {
-                usersDataRepository.deleteById(userId);
+            List<Integer> existingIds = usersDataRepository.findAllById(userIds).stream()
+                    .map(UsersDataTable::getId)
+                    .toList();
+            if (existingIds.isEmpty()) {
+                return "Users not found";
             }
-            return "User deleted successfully";
+            usersDataRepository.deleteAllById(existingIds);
+            return "Users deleted successfully";
         } catch (Exception e) {
-            return "Error deleting user: " + e.getMessage();
+            return "Error deleting users: " + e.getMessage();
         }
     }
+
 
 
 
