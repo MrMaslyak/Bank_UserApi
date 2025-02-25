@@ -19,10 +19,6 @@ public interface UsersDataRepository extends JpaRepository<UsersDataTable, Integ
     @Query("UPDATE UsersDataTable u SET u.status = :status WHERE u.id = :userId")
     void setStatus(@Param("userId") Integer userId, @Param("status") boolean status);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE UsersDataTable u SET u.login = :newLogin WHERE u.id = :userId")
-    void changeLogin(@Param("userId") int userId, @Param("newLogin") String newLogin);
 
     @Transactional
     @Modifying

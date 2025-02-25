@@ -43,10 +43,15 @@ public class ManagementService extends ServiceCore {
 
     public String changeLogin(int id, String newLogin) {
         try {
-            usersDataRepository.changeLogin(id, newLogin);
-            return "Login changed successfully";
+            UsersDataTable user = usersDataRepository.findById(id)
+                    .orElseThrow(() -> new Exception("User not found"));
+
+            user.setLogin(newLogin);
+            usersDataRepository.save(user);
+
+            return "Login updated successfully";
         } catch (Exception e) {
-            return "Error changing login: " + e.getMessage();
+            return "Error updating login: " + e.getMessage();
         }
     }
 
