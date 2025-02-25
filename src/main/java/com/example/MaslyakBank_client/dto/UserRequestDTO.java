@@ -12,6 +12,7 @@ public class UserRequestDTO {
     private List<String> logins;
     private String login;
     private String email;
+    private String password;
     private int user_id;
     private boolean getStatus;
 

@@ -10,25 +10,21 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "bank_users_data")
-public class UsersDataTable {
+@Table(name = "bank_user_auth_token")
+public class UsersAuthTokenTable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "user_id")
+    private Integer user_id;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
-    private String password;
+    @Column(name = "token")
+    private String token;
 
     @Column(name = "created_at")
     private Date created_at;
 
-    @Column(name = "status")
-    private boolean status;
-}
+    }

@@ -6,6 +6,7 @@ import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import org.springframework.stereotype.Service;
 import com.example.MaslyakBank_client.domain.UsersDataTable;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,11 +22,11 @@ public class ManagementService extends ServiceCore {
                     "[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|" +
                     "\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$";
 
+
+
     public ManagementService(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository) {
         super(userBalanceTableRepository, usersDataRepository);
     }
-
-
 
     public String updateUserStatus(List<UserRequestDTO> userData) {
         try {
@@ -75,6 +76,27 @@ public class ManagementService extends ServiceCore {
             return "Users deleted successfully";
         } catch (Exception e) {
             return "Error deleting users: " + e.getMessage();
+        }
+    }
+
+    public String createUser (UserRequestDTO userRequestDTO) {
+        try {
+            if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userRequestDTO.getLogin()))) {
+                return "Login already exists";
+            }
+            if (!userRequestDTO.getEmail().matches(EMAIL_PATTERN)) {
+                return "Invalid email format";
+            }
+            UsersDataTable user = new UsersDataTable();
+            user.setLogin(userRequestDTO.getLogin());
+            user.setEmail(userRequestDTO.getEmail());
+            user.setPassword(userRequestDTO.getPassword());
+            user.setCreated_at(Date.from(java.time.Instant.now()));
+            user.setStatus(false);
+            usersDataRepository.save(user);
+            return "User created successfully";
+        } catch (Exception e) {
+            return "Error creating user: " + e.getMessage();
         }
     }
 

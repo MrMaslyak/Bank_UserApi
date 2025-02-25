@@ -42,5 +42,10 @@ public class ControllerManagement {
         return accountManagement.deleteUserById(userRequestDTO.getUsers_id());
     }
 
+    @PostMapping("/create_user")
+    public String createUser(@RequestBody UserRequestDTO userRequestDTO) {
+        return accountManagement.createUser(userRequestDTO);
+    }
+
 
 }
