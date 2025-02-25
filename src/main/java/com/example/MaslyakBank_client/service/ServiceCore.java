@@ -1,6 +1,7 @@
 package com.example.MaslyakBank_client.service;
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
+import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public abstract class ServiceCore {
 
     protected final UserBalanceTableRepository userBalanceTableRepository;
     protected final UsersDataRepository usersDataRepository;
+    protected final UserAuthTokenRepository  userAuthTokenRepository;
 
     public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
         List<UserDataBalanceDTO> dtoList = new ArrayList<>();

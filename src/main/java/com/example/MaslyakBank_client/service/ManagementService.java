@@ -1,6 +1,9 @@
 package com.example.MaslyakBank_client.service;
 
+import com.example.MaslyakBank_client.domain.UsersAuthTokenTable;
+import com.example.MaslyakBank_client.domain.UsersBalanceDataTable;
 import com.example.MaslyakBank_client.dto.UserRequestDTO;
+import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import org.springframework.stereotype.Service;
@@ -22,11 +25,10 @@ public class ManagementService extends ServiceCore {
                     "[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|" +
                     "\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$";
 
-
-
-    public ManagementService(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository) {
-        super(userBalanceTableRepository, usersDataRepository);
+    public ManagementService(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository, UserAuthTokenRepository userAuthTokenRepository) {
+        super(userBalanceTableRepository, usersDataRepository, userAuthTokenRepository);
     }
+
 
     public String updateUserStatus(List<UserRequestDTO> userData) {
         try {
@@ -87,13 +89,27 @@ public class ManagementService extends ServiceCore {
             if (!userRequestDTO.getEmail().matches(EMAIL_PATTERN)) {
                 return "Invalid email format";
             }
+
             UsersDataTable user = new UsersDataTable();
             user.setLogin(userRequestDTO.getLogin());
             user.setEmail(userRequestDTO.getEmail());
             user.setPassword(userRequestDTO.getPassword());
             user.setCreated_at(Date.from(java.time.Instant.now()));
             user.setStatus(false);
-            usersDataRepository.save(user);
+
+            user = usersDataRepository.save(user);
+
+            UsersBalanceDataTable userBalance = new UsersBalanceDataTable();
+            userBalance.setUser_id(user);
+            userBalance.setBalance_usd("0.00");
+            userBalanceTableRepository.save(userBalance);
+
+            UsersAuthTokenTable  userAuthToken = new UsersAuthTokenTable();
+            userAuthToken.setUser_id(user);
+            userAuthToken.setToken("null");
+            userAuthToken.setCreated_at(Date.from(java.time.Instant.now()));
+            userAuthTokenRepository.save(userAuthToken);
+
             return "User created successfully";
         } catch (Exception e) {
             return "Error creating user: " + e.getMessage();

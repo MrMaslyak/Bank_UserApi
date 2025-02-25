@@ -18,8 +18,9 @@ public class UsersAuthTokenTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id")
-    private Integer user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private UsersDataTable user_id;
 
     @Column(name = "token")
     private String token;
