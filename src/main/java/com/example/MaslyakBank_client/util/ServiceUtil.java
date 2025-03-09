@@ -1,22 +1,28 @@
-package com.example.MaslyakBank_client.service;
+package com.example.MaslyakBank_client.util;
+
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
-import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
+public class ServiceUtil {
 
-@RequiredArgsConstructor
-public abstract class ServiceCore {
+    private final UserBalanceTableRepository userBalanceTableRepository;
+    private final UsersDataRepository usersDataRepository;
 
-    protected final UserBalanceTableRepository userBalanceTableRepository;
-    protected final UsersDataRepository usersDataRepository;
-    protected final UserAuthTokenRepository  userAuthTokenRepository;
+
+    @Autowired
+    public ServiceUtil(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository) {
+        this.userBalanceTableRepository = userBalanceTableRepository;
+        this.usersDataRepository = usersDataRepository;
+    }
 
     public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
         List<UserDataBalanceDTO> dtoList = new ArrayList<>();
@@ -31,7 +37,4 @@ public abstract class ServiceCore {
         }
         return dtoList;
     }
-
-
-
 }

@@ -3,10 +3,13 @@ package com.example.MaslyakBank_client.service;
 import com.example.MaslyakBank_client.domain.UsersAuthTokenTable;
 import com.example.MaslyakBank_client.domain.UsersBalanceDataTable;
 import com.example.MaslyakBank_client.domain.UsersDataTable;
+import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
+import com.example.MaslyakBank_client.util.ServiceUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,7 +17,7 @@ import java.util.List;
 
 
 @Service
-public class ManagementService extends ServiceCore {
+public class ManagementService {
 
     private static final String EMAIL_PATTERN =
             "^(?![!#$%&'*+/=?^_`{|}~])[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+" +
@@ -25,8 +28,27 @@ public class ManagementService extends ServiceCore {
                     "[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|" +
                     "\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$";
 
-    public ManagementService(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository, UserAuthTokenRepository userAuthTokenRepository) {
-        super(userBalanceTableRepository, usersDataRepository, userAuthTokenRepository);
+
+    private final UsersDataRepository usersDataRepository;
+    private final UserBalanceTableRepository userBalanceTableRepository;
+    private final UserAuthTokenRepository userAuthTokenRepository;
+    private final ServiceUtil  serviceUtil;
+
+    @Autowired
+    public ManagementService(
+            UsersDataRepository usersDataRepository,
+            UserBalanceTableRepository userBalanceTableRepository,
+            UserAuthTokenRepository userAuthTokenRepository,
+            ServiceUtil serviceUtil
+    ) {
+        this.usersDataRepository = usersDataRepository;
+        this.userBalanceTableRepository = userBalanceTableRepository;
+        this.userAuthTokenRepository = userAuthTokenRepository;
+        this.serviceUtil = serviceUtil;
+    }
+
+    public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
+        return serviceUtil.getUserBalance(userIds);
     }
 
 
@@ -40,7 +62,6 @@ public class ManagementService extends ServiceCore {
             return "Error updating status: " + e.getMessage();
         }
     }
-
 
 
     public String changeLogin(int id, String newLogin) {
@@ -64,7 +85,7 @@ public class ManagementService extends ServiceCore {
             }
             if (!newEmail.matches(EMAIL_PATTERN)) {
                 return "Invalid email format";
-            }else {
+            } else {
                 usersDataRepository.changeEmail(id, newEmail);
                 return "Email changed successfully";
             }
@@ -88,7 +109,7 @@ public class ManagementService extends ServiceCore {
         }
     }
 
-    public String createUser (UserRequestDTO userRequestDTO) {
+    public String createUser(UserRequestDTO userRequestDTO) {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userRequestDTO.getLogin()))) {
                 return "Login already exists";
@@ -111,7 +132,7 @@ public class ManagementService extends ServiceCore {
             userBalance.setBalance_usd("0.00");
             userBalanceTableRepository.save(userBalance);
 
-            UsersAuthTokenTable  userAuthToken = new UsersAuthTokenTable();
+            UsersAuthTokenTable userAuthToken = new UsersAuthTokenTable();
             userAuthToken.setUser_id(user);
             userAuthToken.setToken("null");
             userAuthToken.setCreated_at(Date.from(java.time.Instant.now()));
@@ -122,8 +143,6 @@ public class ManagementService extends ServiceCore {
             return "Error creating user: " + e.getMessage();
         }
     }
-
-
 
 
 }
