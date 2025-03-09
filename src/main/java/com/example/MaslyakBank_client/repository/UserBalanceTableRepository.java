@@ -15,4 +15,6 @@ public interface UserBalanceTableRepository extends JpaRepository<UsersBalanceDa
     Optional<String> findBalanceByUserId(@Param("userId") Integer userId);
 
 
+
+
 }

@@ -2,12 +2,12 @@ package com.example.MaslyakBank_client.service;
 
 import com.example.MaslyakBank_client.domain.UsersAuthTokenTable;
 import com.example.MaslyakBank_client.domain.UsersBalanceDataTable;
+import com.example.MaslyakBank_client.domain.UsersDataTable;
 import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import org.springframework.stereotype.Service;
-import com.example.MaslyakBank_client.domain.UsersDataTable;
 
 import java.util.Date;
 import java.util.List;
@@ -40,6 +40,8 @@ public class ManagementService extends ServiceCore {
             return "Error updating status: " + e.getMessage();
         }
     }
+
+
 
     public String changeLogin(int id, String newLogin) {
         try {
