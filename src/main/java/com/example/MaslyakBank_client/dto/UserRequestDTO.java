@@ -20,6 +20,7 @@ public class UserRequestDTO {
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
     private String email;
 
+
     private List<Integer> users_id;
     private List<String> logins;
 
