@@ -38,9 +38,10 @@ public class AccountService {
         List<UsersDataTable> usersList = usersDataRepository.findAll();
         for (UsersDataTable user : usersList) {
             UserDataDTO userDataDTO = new UserDataDTO();
-            userDataDTO.setUserId(user.getId());
+            userDataDTO.setUser_id(user.getId());
             userDataDTO.setLogin(user.getLogin());
             userDataDTO.setEmail(user.getEmail());
+            userDataDTO.setPassword(user.getPassword());
             dtoList.add(userDataDTO);
         }
         return dtoList;

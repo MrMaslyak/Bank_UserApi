@@ -2,14 +2,18 @@ package com.example.MaslyakBank_client.controller.Versions;
 
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
+import com.example.MaslyakBank_client.dto.UserDataDTO;
 import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.service.ManagementService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Validated // Нужно для валидации List<UserRequestDTO>
 @RequiredArgsConstructor
 @RequestMapping("/bank/v2")
 public class ControllerManagement {
@@ -23,28 +27,28 @@ public class ControllerManagement {
     }
 
     @PostMapping("/update_status")
-    public String updateUserStatus(@RequestBody List<UserRequestDTO> userRequestDTOList) {
+    public String updateUserStatus(@RequestBody List<UserDataDTO> userRequestDTOList) {
         return accountManagement.updateUserStatus(userRequestDTOList);
     }
 
     @PutMapping("/change_login")
-    public String changeLogin(@RequestBody UserRequestDTO userRequestDTO) {
+    public String changeLogin(@RequestBody @Valid UserRequestDTO userRequestDTO) {
         return accountManagement.changeLogin(userRequestDTO.getUser_id(), userRequestDTO.getLogin());
     }
 
     @PatchMapping("/change_email")
-    public String changeEmail(@RequestBody UserRequestDTO userRequestDTO) {
+    public String changeEmail(@RequestBody @Valid UserRequestDTO userRequestDTO) {
         return accountManagement.changeEmail(userRequestDTO.getUser_id(), userRequestDTO.getEmail());
     }
 
     @DeleteMapping("/delete_user")
-    public String deleteUser(@RequestBody UserRequestDTO userRequestDTO) {
+    public String deleteUser(@RequestBody @Valid UserRequestDTO userRequestDTO) {
         return accountManagement.deleteUserById(userRequestDTO.getUsers_id());
     }
 
     @PostMapping("/create_user")
-    public String createUser(@RequestBody UserRequestDTO userRequestDTO) {
-        return accountManagement.createUser(userRequestDTO);
+    public String createUser(@RequestBody @Valid UserDataDTO userDataDTO) {
+        return accountManagement.createUser(userDataDTO);
     }
 
 

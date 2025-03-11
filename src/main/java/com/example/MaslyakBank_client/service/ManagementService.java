@@ -4,7 +4,7 @@ import com.example.MaslyakBank_client.domain.UsersAuthTokenTable;
 import com.example.MaslyakBank_client.domain.UsersBalanceDataTable;
 import com.example.MaslyakBank_client.domain.UsersDataTable;
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
-import com.example.MaslyakBank_client.dto.UserRequestDTO;
+import com.example.MaslyakBank_client.dto.UserDataDTO;
 import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
@@ -19,17 +19,6 @@ import java.util.List;
 
 @Service
 public class ManagementService {
-
-
-    private static final String EMAIL_PATTERN =
-            "^(?![!#$%&'*+/=?^_`{|}~])[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+" +
-                    "(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*" +
-                    "@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+" +
-                    "[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|" +
-                    "[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|" +
-                    "[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|" +
-                    "\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$";
-
 
     private final UsersDataRepository usersDataRepository;
     private final UserBalanceTableRepository userBalanceTableRepository;
@@ -54,9 +43,9 @@ public class ManagementService {
     }
 
 
-    public String updateUserStatus(List<UserRequestDTO> userData) {
+    public String updateUserStatus(List<UserDataDTO> userData) {
         try {
-            for (UserRequestDTO user : userData) {
+            for (UserDataDTO user : userData) {
                 usersDataRepository.setStatus(user.getUser_id(), user.isGetStatus());
             }
             return "Status updated successfully";
@@ -80,14 +69,13 @@ public class ManagementService {
         }
     }
 
+
     public String changeEmail(int id, String newEmail) {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getEmail().equals(newEmail))) {
                 return "Email already exists";
             }
-            if (!newEmail.matches(EMAIL_PATTERN)) {
-                return "Invalid email format";
-            } else {
+            else {
                 usersDataRepository.changeEmail(id, newEmail);
                 return "Email changed successfully";
             }
@@ -113,16 +101,13 @@ public class ManagementService {
 
 
     @Transactional
-    public String createUser(UserRequestDTO userRequestDTO) {
+    public String createUser(UserDataDTO userDataDTO) {
         try {
-            if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userRequestDTO.getLogin()))) {
+            if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userDataDTO.getLogin()))) {
                 return "Login already exists";
             }
-            if (!userRequestDTO.getEmail().matches(EMAIL_PATTERN)) {
-                return "Invalid email format";
-            }
 
-            UsersDataTable user = saveUser(userRequestDTO);
+            UsersDataTable user = saveUser(userDataDTO);
             saveUserBalance(user);
             saveUserAuthToken(user);
 
@@ -132,11 +117,11 @@ public class ManagementService {
         }
     }
 
-    private UsersDataTable saveUser(UserRequestDTO  userRequestDTO) {
+    private UsersDataTable saveUser(UserDataDTO userDataDTO) {
         UsersDataTable user = new UsersDataTable();
-        user.setLogin(userRequestDTO.getLogin());
-        user.setEmail(userRequestDTO.getEmail());
-        user.setPassword(userRequestDTO.getPassword());
+        user.setLogin(userDataDTO.getLogin());
+        user.setEmail(userDataDTO.getEmail());
+        user.setPassword(userDataDTO.getPassword());
         user.setCreated_at(Date.from(java.time.Instant.now()));
         user.setStatus(false);
         return usersDataRepository.save(user);

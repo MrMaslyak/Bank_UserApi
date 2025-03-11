@@ -24,10 +24,6 @@ public class ServiceUtil {
     }
 
 
-
-
-
-
     public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
         List<UserDataBalanceDTO> dtoList = new ArrayList<>();
         for (int userId : userIds) {
