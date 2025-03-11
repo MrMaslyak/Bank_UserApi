@@ -4,8 +4,6 @@ package com.example.MaslyakBank_client.service;
 import com.example.MaslyakBank_client.domain.UsersDataTable;
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
-import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
-import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import com.example.MaslyakBank_client.util.ServiceUtil;
 import org.springframework.beans.factory.annotation.Autowired;

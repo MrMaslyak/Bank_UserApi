@@ -9,6 +9,7 @@ import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import com.example.MaslyakBank_client.util.ServiceUtil;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 public class ManagementService {
+
 
     private static final String EMAIL_PATTERN =
             "^(?![!#$%&'*+/=?^_`{|}~])[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+" +
@@ -109,6 +111,8 @@ public class ManagementService {
         }
     }
 
+
+    @Transactional
     public String createUser(UserRequestDTO userRequestDTO) {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userRequestDTO.getLogin()))) {
@@ -118,30 +122,37 @@ public class ManagementService {
                 return "Invalid email format";
             }
 
-            UsersDataTable user = new UsersDataTable();
-            user.setLogin(userRequestDTO.getLogin());
-            user.setEmail(userRequestDTO.getEmail());
-            user.setPassword(userRequestDTO.getPassword());
-            user.setCreated_at(Date.from(java.time.Instant.now()));
-            user.setStatus(false);
-
-            user = usersDataRepository.save(user);
-
-            UsersBalanceDataTable userBalance = new UsersBalanceDataTable();
-            userBalance.setUser_id(user);
-            userBalance.setBalance_usd("0.00");
-            userBalanceTableRepository.save(userBalance);
-
-            UsersAuthTokenTable userAuthToken = new UsersAuthTokenTable();
-            userAuthToken.setUser_id(user);
-            userAuthToken.setToken("null");
-            userAuthToken.setCreated_at(Date.from(java.time.Instant.now()));
-            userAuthTokenRepository.save(userAuthToken);
+            UsersDataTable user = saveUser(userRequestDTO);
+            saveUserBalance(user);
+            saveUserAuthToken(user);
 
             return "User created successfully";
         } catch (Exception e) {
             return "Error creating user: " + e.getMessage();
         }
+    }
+
+    private UsersDataTable saveUser(UserRequestDTO  userRequestDTO) {
+        UsersDataTable user = new UsersDataTable();
+        user.setLogin(userRequestDTO.getLogin());
+        user.setEmail(userRequestDTO.getEmail());
+        user.setPassword(userRequestDTO.getPassword());
+        user.setCreated_at(Date.from(java.time.Instant.now()));
+        user.setStatus(false);
+        return usersDataRepository.save(user);
+    }
+    private void saveUserBalance(UsersDataTable user) {
+        UsersBalanceDataTable userBalance = new UsersBalanceDataTable();
+        userBalance.setUser_id(user);
+        userBalance.setBalance_usd("0.00");
+        userBalanceTableRepository.save(userBalance);
+    }
+    private void saveUserAuthToken(UsersDataTable user) {
+        UsersAuthTokenTable userAuthToken = new UsersAuthTokenTable();
+        userAuthToken.setUser_id(user);
+        userAuthToken.setToken("null");
+        userAuthToken.setCreated_at(Date.from(java.time.Instant.now()));
+        userAuthTokenRepository.save(userAuthToken);
     }
 
 

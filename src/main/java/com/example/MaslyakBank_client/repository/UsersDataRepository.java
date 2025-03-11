@@ -29,14 +29,12 @@ public interface UsersDataRepository extends JpaRepository<UsersDataTable, Integ
     @Query("SELECT u.login FROM UsersDataTable u WHERE u.id = :userId")
     Optional<String> findLoginByUserId(@Param("userId") Integer userId);
 
-    @Query("SELECT u.id FROM UsersDataTable u WHERE u.login IN :logins")
-    List<String> findUserIdByLogin(@Param("logins") List<String> logins);
-
     @Override
     List<UsersDataTable> findAll();
 
     @Override
     List<UsersDataTable> findAllById(Iterable<Integer> integers);
+
 
 
 }
