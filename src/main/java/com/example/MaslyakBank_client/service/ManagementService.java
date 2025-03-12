@@ -5,6 +5,7 @@ import com.example.MaslyakBank_client.domain.UsersBalanceDataTable;
 import com.example.MaslyakBank_client.domain.UsersDataTable;
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
+import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
@@ -43,9 +44,9 @@ public class ManagementService {
     }
 
 
-    public String updateUserStatus(List<UserDataDTO> userData) {
+    public String updateUserStatus(List<UserRequestDTO> userData) {
         try {
-            for (UserDataDTO user : userData) {
+            for (UserRequestDTO user : userData) {
                 usersDataRepository.setStatus(user.getUser_id(), user.isGetStatus());
             }
             return "Status updated successfully";

@@ -23,5 +23,5 @@ public class UserRequestDTO {
 
     private List<Integer> users_id;
     private List<String> logins;
-
+    private boolean getStatus;
 }

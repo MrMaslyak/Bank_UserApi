@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Validated // Нужно для валидации List<UserRequestDTO>
+@Validated //todo
 @RequiredArgsConstructor
 @RequestMapping("/bank/v2")
 public class ControllerManagement {
@@ -27,7 +27,7 @@ public class ControllerManagement {
     }
 
     @PostMapping("/update_status")
-    public String updateUserStatus(@RequestBody List<UserDataDTO> userRequestDTOList) {
+    public String updateUserStatus(@RequestBody List<@Valid UserRequestDTO> userRequestDTOList) {//todo
         return accountManagement.updateUserStatus(userRequestDTOList);
     }
 
