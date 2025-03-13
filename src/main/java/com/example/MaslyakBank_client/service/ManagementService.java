@@ -87,9 +87,7 @@ public class ManagementService {
 
     public String deleteUserById(List<Integer> userIds) {
         try {
-            List<Integer> existingIds = usersDataRepository.findAllById(userIds).stream()
-                    .map(UsersDataTable::getId)
-                    .toList();
+            List<Integer> existingIds = usersDataRepository.findAllById(userIds).stream().map(UsersDataTable::getId).toList();
             if (existingIds.isEmpty()) {
                 return "Users not found";
             }
