@@ -6,6 +6,7 @@ import com.example.MaslyakBank_client.dto.UserDataDTO;
 import com.example.MaslyakBank_client.dto.UserRequestDTO;
 import com.example.MaslyakBank_client.service.ManagementService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Validated //todo
 @RequiredArgsConstructor
 @RequestMapping("/bank/v2")
+@Validated
 public class ControllerManagement {
-
 
     private final ManagementService accountManagement;
 
@@ -27,7 +27,7 @@ public class ControllerManagement {
     }
 
     @PostMapping("/update_status")
-    public String updateUserStatus(@RequestBody List<@Valid UserRequestDTO> userRequestDTOList) {//todo
+    public String updateUserStatus(@RequestBody  List<UserRequestDTO> userRequestDTOList) {
         return accountManagement.updateUserStatus(userRequestDTOList);
     }
 
