@@ -36,7 +36,7 @@ public class AccountService {
     public List<UserDataDTO> getUsers() {
         List<UserDataDTO> dtoList = new ArrayList<>();
         List<UsersDataTable> usersList = usersDataRepository.findAll();
-        for (UsersDataTable user : usersList) {
+        for (UsersDataTable user : usersList) { //todo должен делать специальный маппер - один вид класса перевестись в другой
             UserDataDTO userDataDTO = new UserDataDTO();
             userDataDTO.setUser_id(user.getId());
             userDataDTO.setLogin(user.getLogin());
@@ -46,5 +46,7 @@ public class AccountService {
         }
         return dtoList;
     }
+
+
 
 }

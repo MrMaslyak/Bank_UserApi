@@ -49,7 +49,7 @@ public class ManagementService {
             for (UserRequestDTO user : userData) {
                 usersDataRepository.setStatus(user.getUser_id(), user.isGetStatus());
             }
-            return "Status updated successfully";
+            return "Status updated successfully";//todo передавать джейсон
         } catch (Exception e) {
             return "Error updating status: " + e.getMessage();
         }
@@ -64,7 +64,7 @@ public class ManagementService {
             user.setLogin(newLogin);
             usersDataRepository.save(user);
 
-            return "Login updated successfully";
+            return "Login updated successfully";//todo передавать джейсон
         } catch (Exception e) {
             return "Error updating login: " + e.getMessage();
         }
@@ -75,10 +75,10 @@ public class ManagementService {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getEmail().equals(newEmail))) {
                 return "Email already exists";
-            }
+            } // todo скинуть в  Validator-Class
             else {
                 usersDataRepository.changeEmail(id, newEmail);
-                return "Email changed successfully";
+                return "Email changed successfully";//todo передавать джейсон
             }
         } catch (Exception e) {
             return "Error changing email: " + e.getMessage();
@@ -90,9 +90,9 @@ public class ManagementService {
             List<Integer> existingIds = usersDataRepository.findAllById(userIds).stream().map(UsersDataTable::getId).toList();
             if (existingIds.isEmpty()) {
                 return "Users not found";
-            }
+            }// todo скинуть в  Validator-Class
             usersDataRepository.deleteAllById(existingIds);
-            return "Users deleted successfully";
+            return "Users deleted successfully";//todo передавать джейсон
         } catch (Exception e) {
             return "Error deleting users: " + e.getMessage();
         }
@@ -104,19 +104,19 @@ public class ManagementService {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userDataDTO.getLogin()))) {
                 return "Login already exists";
-            }
+            } // todo скинуть в  Validator-Class
 
             UsersDataTable user = saveUser(userDataDTO);
             saveUserBalance(user);
             saveUserAuthToken(user);
 
-            return "User created successfully";
+            return "User created successfully";//todo передавать джейсон
         } catch (Exception e) {
             return "Error creating user: " + e.getMessage();
         }
     }
 
-    private UsersDataTable saveUser(UserDataDTO userDataDTO) {
+    private UsersDataTable saveUser(UserDataDTO userDataDTO) { //todo - маппер с одного обьекта в другой перевод
         UsersDataTable user = new UsersDataTable();
         user.setLogin(userDataDTO.getLogin());
         user.setEmail(userDataDTO.getEmail());
@@ -125,19 +125,22 @@ public class ManagementService {
         user.setStatus(false);
         return usersDataRepository.save(user);
     }
-    private void saveUserBalance(UsersDataTable user) {
+    private void saveUserBalance(UsersDataTable user) { //todo - маппер с одного обьекта в другой перевод
         UsersBalanceDataTable userBalance = new UsersBalanceDataTable();
         userBalance.setUser_id(user);
         userBalance.setBalance_usd("0.00");
         userBalanceTableRepository.save(userBalance);
     }
-    private void saveUserAuthToken(UsersDataTable user) {
+    private void saveUserAuthToken(UsersDataTable user) { //todo - маппер с одного обьекта в другой перевод
         UsersAuthTokenTable userAuthToken = new UsersAuthTokenTable();
         userAuthToken.setUser_id(user);
         userAuthToken.setToken("null");
         userAuthToken.setCreated_at(Date.from(java.time.Instant.now()));
         userAuthTokenRepository.save(userAuthToken);
     }
+
+
+
 
 
 }

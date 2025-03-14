@@ -14,11 +14,13 @@ public class ValidationExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {//todo переделать джсон вывод ошибки errorCode: Integer; errorMessage: String; errorDetails?: String[]
+
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage()));
         return errors;
     }
+
 
 }

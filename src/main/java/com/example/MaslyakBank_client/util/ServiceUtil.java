@@ -29,7 +29,7 @@ public class ServiceUtil {
         for (int userId : userIds) {
             Optional<String> userBalance = userBalanceTableRepository.findBalanceByUserId(userId);
             Optional<String> userLogin = usersDataRepository.findLoginByUserId(userId);
-            UserDataBalanceDTO userDataDTO = new UserDataBalanceDTO();
+            UserDataBalanceDTO userDataDTO = new UserDataBalanceDTO();//todo - mapper пернести
             userDataDTO.setUserId(userId);
             userDataDTO.setLogin(userLogin.orElse("User not regist in system"));
             userDataDTO.setBalance(userBalance.orElse("User not regist in system"));

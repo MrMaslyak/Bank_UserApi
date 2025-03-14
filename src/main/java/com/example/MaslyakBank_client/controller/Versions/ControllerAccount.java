@@ -19,7 +19,7 @@ public class ControllerAccount {
     private final AccountService account;
 
 
-    @GetMapping("/user_balance")
+    @GetMapping("/user_balance")// /balance , если я ему не передаю отдельные айди, которые я хочу он будет выдавать весь список юзеров со веми балансами
     public List<UserDataBalanceDTO> getUserBalance(@RequestParam("user_id") List<Integer> userIds) {
         return account.getUserBalance(userIds);
     }
