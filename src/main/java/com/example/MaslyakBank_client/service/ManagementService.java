@@ -10,7 +10,9 @@ import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import com.example.MaslyakBank_client.util.ServiceUtil;
+import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 
+@Slf4j
 @Service
 public class ManagementService {
 
@@ -39,6 +42,13 @@ public class ManagementService {
         this.serviceUtil = serviceUtil;
     }
 
+    @PostConstruct
+    public void init() {
+        log.warn("⚠️⚠️ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
+        log.warn("⚠️⚠️ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
+        log.warn("⚠️⚠️ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
+    }
+
     public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
         return serviceUtil.getUserBalance(userIds);
     }
@@ -49,7 +59,7 @@ public class ManagementService {
             for (UserRequestDTO user : userData) {
                 usersDataRepository.setStatus(user.getUser_id(), user.isGetStatus());
             }
-            return "Status updated successfully";//todo передавать джейсон
+            return "Status updated successfully";//todo
         } catch (Exception e) {
             return "Error updating status: " + e.getMessage();
         }
@@ -59,12 +69,12 @@ public class ManagementService {
     public String changeLogin(int id, String newLogin) {
         try {
             UsersDataTable user = usersDataRepository.findById(id)
-                    .orElseThrow(() -> new Exception("User not found"));
+                    .orElseThrow(() -> new Exception("User not found"));//todo
 
             user.setLogin(newLogin);
             usersDataRepository.save(user);
 
-            return "Login updated successfully";//todo передавать джейсон
+            return "Login updated successfully";//todo
         } catch (Exception e) {
             return "Error updating login: " + e.getMessage();
         }
@@ -75,10 +85,10 @@ public class ManagementService {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getEmail().equals(newEmail))) {
                 return "Email already exists";
-            } // todo скинуть в  Validator-Class
+            } // todo
             else {
                 usersDataRepository.changeEmail(id, newEmail);
-                return "Email changed successfully";//todo передавать джейсон
+                return "Email changed successfully";//todo
             }
         } catch (Exception e) {
             return "Error changing email: " + e.getMessage();
@@ -90,9 +100,9 @@ public class ManagementService {
             List<Integer> existingIds = usersDataRepository.findAllById(userIds).stream().map(UsersDataTable::getId).toList();
             if (existingIds.isEmpty()) {
                 return "Users not found";
-            }// todo скинуть в  Validator-Class
+            }// todo
             usersDataRepository.deleteAllById(existingIds);
-            return "Users deleted successfully";//todo передавать джейсон
+            return "Users deleted successfully";//todo
         } catch (Exception e) {
             return "Error deleting users: " + e.getMessage();
         }
@@ -104,34 +114,35 @@ public class ManagementService {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userDataDTO.getLogin()))) {
                 return "Login already exists";
-            } // todo скинуть в  Validator-Class
+            } // todo
 
             UsersDataTable user = saveUser(userDataDTO);
             saveUserBalance(user);
             saveUserAuthToken(user);
 
-            return "User created successfully";//todo передавать джейсон
+            return "User created successfully";//todo
         } catch (Exception e) {
             return "Error creating user: " + e.getMessage();
         }
     }
 
-    private UsersDataTable saveUser(UserDataDTO userDataDTO) { //todo - маппер с одного обьекта в другой перевод
+    private UsersDataTable saveUser(UserDataDTO userDataDTO) { //todo
         UsersDataTable user = new UsersDataTable();
         user.setLogin(userDataDTO.getLogin());
         user.setEmail(userDataDTO.getEmail());
         user.setPassword(userDataDTO.getPassword());
         user.setCreated_at(Date.from(java.time.Instant.now()));
         user.setStatus(false);
+
         return usersDataRepository.save(user);
     }
-    private void saveUserBalance(UsersDataTable user) { //todo - маппер с одного обьекта в другой перевод
+    private void saveUserBalance(UsersDataTable user) { //todo
         UsersBalanceDataTable userBalance = new UsersBalanceDataTable();
         userBalance.setUser_id(user);
         userBalance.setBalance_usd("0.00");
         userBalanceTableRepository.save(userBalance);
     }
-    private void saveUserAuthToken(UsersDataTable user) { //todo - маппер с одного обьекта в другой перевод
+    private void saveUserAuthToken(UsersDataTable user) { //todo
         UsersAuthTokenTable userAuthToken = new UsersAuthTokenTable();
         userAuthToken.setUser_id(user);
         userAuthToken.setToken("null");

@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class UserRequestDTO {//todo для каждого ендпоинта отдельный дто
+public class UserRequestDTO {
 
     @Min(value = 1, message = "User ID must be greater than 0")
     private Integer user_id;

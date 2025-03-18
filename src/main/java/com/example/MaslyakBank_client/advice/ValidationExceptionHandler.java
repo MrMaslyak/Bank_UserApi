@@ -1,5 +1,8 @@
 package com.example.MaslyakBank_client.advice;
 
+import com.example.MaslyakBank_client.service.ManagementService;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,12 +12,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice
 public class ValidationExceptionHandler {
 
+
+    @PostConstruct
+    public void init() {
+        log.warn("⚠️⚠️ TODO: Передавать JSON вывод ошибки в формате errorCode: Integer; errorMessage: String; errorDetails?: String[]", ValidationExceptionHandler.class.getName() + ".java");
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {//todo переделать джсон вывод ошибки errorCode: Integer; errorMessage: String; errorDetails?: String[]
+    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {//todo
 
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
