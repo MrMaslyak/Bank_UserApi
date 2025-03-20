@@ -2,6 +2,7 @@ package com.example.MaslyakBank_client.util;
 
 
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
+import com.example.MaslyakBank_client.mappers.UserBalanceMapper;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import com.example.MaslyakBank_client.service.ManagementService;
@@ -19,12 +20,13 @@ public class ServiceUtil {
 
     private final UserBalanceTableRepository userBalanceTableRepository;
     private final UsersDataRepository usersDataRepository;
-
+    private final UserBalanceMapper userBalanceMapper;
 
     @Autowired
-    public ServiceUtil(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository) {
+    public ServiceUtil(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository, UserBalanceMapper userBalanceMapper) {
         this.userBalanceTableRepository = userBalanceTableRepository;
         this.usersDataRepository = usersDataRepository;
+        this.userBalanceMapper = userBalanceMapper;
     }
 
     @PostConstruct

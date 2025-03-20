@@ -5,6 +5,7 @@ import com.example.MaslyakBank_client.controller.Versions.ControllerManagement;
 import com.example.MaslyakBank_client.domain.UsersDataTable;
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
+import com.example.MaslyakBank_client.mappers.UserDataMapper;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
 import com.example.MaslyakBank_client.util.ServiceUtil;
 import jakarta.annotation.PostConstruct;
@@ -21,20 +22,23 @@ public class AccountService {
 
     private final UsersDataRepository usersDataRepository;
     private final ServiceUtil serviceUtil;
+    private final UserDataMapper  userDataMapper;
 
 
     @Autowired
     public AccountService(
             UsersDataRepository usersDataRepository,
-            ServiceUtil serviceUtil
+            ServiceUtil serviceUtil,
+            UserDataMapper  userDataMapper
     ) {
         this.usersDataRepository = usersDataRepository;
         this.serviceUtil = serviceUtil;
+        this.userDataMapper = userDataMapper;
     }
 
     @PostConstruct
     public void init() {
-        log.warn("⚠️⚠️ TODO: ForI в методе getUsers должен заменить MapperClass", AccountService.class.getName() + ".java");
+        log.warn("⚠️✅ TODO: ForI в методе getUsers должен заменить MapperClass", AccountService.class.getName() + ".java");
     }
 
 
@@ -46,11 +50,7 @@ public class AccountService {
         List<UserDataDTO> dtoList = new ArrayList<>();
         List<UsersDataTable> usersList = usersDataRepository.findAll();
         for (UsersDataTable user : usersList) {//todo
-            UserDataDTO userDataDTO = new UserDataDTO();
-            userDataDTO.setUser_id(user.getId());
-            userDataDTO.setLogin(user.getLogin());
-            userDataDTO.setEmail(user.getEmail());
-            userDataDTO.setPassword(user.getPassword());
+           UserDataDTO userDataDTO = userDataMapper.toUserDataDTO(user);
             dtoList.add(userDataDTO);
         }
         return dtoList;

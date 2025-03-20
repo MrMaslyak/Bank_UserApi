@@ -40,7 +40,7 @@ public class ControllerManagement {
     }
 
     @PostMapping("/update_status")
-    public String updateUserStatus(@RequestBody List<UserRequestDTO> userRequestDTOList) {//todo дорозабраться с валидации лисtа
+    public String updateUserStatus(@RequestBody List<UserRequestDTO> userRequestDTOList) {//todo
         return accountManagement.updateUserStatus(userRequestDTOList);
     }
     

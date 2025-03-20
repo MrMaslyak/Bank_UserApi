@@ -4,7 +4,6 @@ package com.example.MaslyakBank_client.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
 @Data
@@ -31,4 +30,8 @@ public class UsersDataTable {
 
     @Column(name = "status")
     private boolean status;
+
+
+
+
 }
