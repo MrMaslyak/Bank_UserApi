@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +26,6 @@ public class UsersAuthTokenTable {
     private String token;
 
     @Column(name = "created_at")
-    private Date created_at;
+    private LocalDateTime created_at;
 
     }

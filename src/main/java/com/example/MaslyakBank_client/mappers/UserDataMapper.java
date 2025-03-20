@@ -12,6 +12,7 @@ public interface UserDataMapper {
 
 
     @Mapping(target = "id", source = "user_id")
+    @Mapping(target = "created_at", expression = "java(java.time.LocalDateTime.now())")
     UsersDataTable toUsersDataTable(UserDataDTO userDataDTO);
 
     @Mapping(target = "user_id", source = "id")

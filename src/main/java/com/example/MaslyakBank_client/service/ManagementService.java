@@ -6,6 +6,9 @@ import com.example.MaslyakBank_client.domain.UsersDataTable;
 import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
 import com.example.MaslyakBank_client.dto.UserDataDTO;
 import com.example.MaslyakBank_client.dto.UserRequestDTO;
+import com.example.MaslyakBank_client.mappers.UserAuthTokenMapper;
+import com.example.MaslyakBank_client.mappers.UserBalanceMapper;
+import com.example.MaslyakBank_client.mappers.UserDataMapper;
 import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
 import com.example.MaslyakBank_client.repository.UsersDataRepository;
@@ -28,23 +31,32 @@ public class ManagementService {
     private final UserBalanceTableRepository userBalanceTableRepository;
     private final UserAuthTokenRepository userAuthTokenRepository;
     private final ServiceUtil  serviceUtil;
+    private final UserDataMapper  userDataMapper;
+    private final UserBalanceMapper  userBalanceMapper;
+    private final UserAuthTokenMapper  userAuthTokenMapper;
 
     @Autowired
     public ManagementService(
             UsersDataRepository usersDataRepository,
             UserBalanceTableRepository userBalanceTableRepository,
             UserAuthTokenRepository userAuthTokenRepository,
-            ServiceUtil serviceUtil
+            ServiceUtil serviceUtil,
+            UserDataMapper  userDataMapper,
+            UserBalanceMapper  userBalanceMapper,
+            UserAuthTokenMapper  userAuthTokenMapper
     ) {
         this.usersDataRepository = usersDataRepository;
         this.userBalanceTableRepository = userBalanceTableRepository;
         this.userAuthTokenRepository = userAuthTokenRepository;
         this.serviceUtil = serviceUtil;
+        this.userDataMapper = userDataMapper;
+        this.userBalanceMapper = userBalanceMapper;
+        this.userAuthTokenMapper = userAuthTokenMapper;
     }
 
     @PostConstruct
     public void init() {
-        log.warn("⚠️⚠️ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
+        log.warn("⚠️✅ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
         log.warn("⚠️⚠️ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
         log.warn("⚠️⚠️ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
     }
@@ -109,7 +121,7 @@ public class ManagementService {
     }
 
 
-    @Transactional
+   @Transactional
     public String createUser(UserDataDTO userDataDTO) {
         try {
             if (usersDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userDataDTO.getLogin()))) {
@@ -127,26 +139,17 @@ public class ManagementService {
     }
 
     private UsersDataTable saveUser(UserDataDTO userDataDTO) { //todo
-        UsersDataTable user = new UsersDataTable();
-        user.setLogin(userDataDTO.getLogin());
-        user.setEmail(userDataDTO.getEmail());
-        user.setPassword(userDataDTO.getPassword());
-        user.setCreated_at(Date.from(java.time.Instant.now()));
-        user.setStatus(false);
-
+        UsersDataTable user = userDataMapper.toUsersDataTable(userDataDTO);
         return usersDataRepository.save(user);
     }
+
     private void saveUserBalance(UsersDataTable user) { //todo
-        UsersBalanceDataTable userBalance = new UsersBalanceDataTable();
-        userBalance.setUser_id(user);
-        userBalance.setBalance_usd("0.00");
+        UsersBalanceDataTable userBalance = userBalanceMapper.toUsersBalanceDataTable(user);
         userBalanceTableRepository.save(userBalance);
     }
+
     private void saveUserAuthToken(UsersDataTable user) { //todo
-        UsersAuthTokenTable userAuthToken = new UsersAuthTokenTable();
-        userAuthToken.setUser_id(user);
-        userAuthToken.setToken("null");
-        userAuthToken.setCreated_at(Date.from(java.time.Instant.now()));
+        UsersAuthTokenTable  userAuthToken = userAuthTokenMapper.toUsersAuthTokenTable(user);
         userAuthTokenRepository.save(userAuthToken);
     }
 

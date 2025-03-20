@@ -41,7 +41,6 @@ public class AccountService {
         log.warn("⚠️✅ TODO: ForI в методе getUsers должен заменить MapperClass", AccountService.class.getName() + ".java");
     }
 
-
     public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
         return serviceUtil.getUserBalance(userIds);
     }
