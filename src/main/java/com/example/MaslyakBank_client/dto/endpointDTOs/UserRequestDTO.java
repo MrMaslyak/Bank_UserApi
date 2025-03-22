@@ -1,4 +1,4 @@
-package com.example.MaslyakBank_client.dto;
+package com.example.MaslyakBank_client.dto.endpointDTOs;
 
 
 import jakarta.validation.constraints.*;

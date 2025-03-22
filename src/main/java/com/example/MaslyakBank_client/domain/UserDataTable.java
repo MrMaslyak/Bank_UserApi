@@ -10,22 +10,29 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "bank_user_auth_token")
-public class UsersAuthTokenTable {
-
+@Table(name = "bank_users_data")
+public class UserDataTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private UsersDataTable user_id;
+    @Column(name = "login")
+    private String login;
 
-    @Column(name = "token")
-    private String token;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "created_at")
     private LocalDateTime created_at;
 
-    }
+    @Column(name = "status")
+    private boolean status;
+
+
+
+
+}

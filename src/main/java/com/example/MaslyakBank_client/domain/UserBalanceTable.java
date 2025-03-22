@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "bank_user_balance")
-public class UsersBalanceDataTable {
+public class UserBalanceTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class UsersBalanceDataTable {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private UsersDataTable user_id;
+    private UserDataTable user_id;
 
     @Column(name = "balance_usd")
     private String balance_usd;

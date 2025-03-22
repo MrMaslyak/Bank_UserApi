@@ -1,9 +1,9 @@
 package com.example.MaslyakBank_client.mappers;
 
 
-import com.example.MaslyakBank_client.domain.UsersBalanceDataTable;
-import com.example.MaslyakBank_client.domain.UsersDataTable;
-import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
+import com.example.MaslyakBank_client.domain.UserBalanceTable;
+import com.example.MaslyakBank_client.domain.UserDataTable;
+import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -13,18 +13,19 @@ public interface UserBalanceMapper {
     @Mapping(target = "userId", source = "user_id.id")
     @Mapping(target = "balance", source = "balance_usd")
     @Mapping(target = "login", source = "user_id.login")
-    UserDataBalanceDTO toUserDataBalanceDTO(UsersBalanceDataTable userBalanceDataTable);
+    UserBalanceDTO toUserDataBalanceDTO(UserBalanceTable userBalanceDataTable);
 
 
-    default UsersBalanceDataTable toUsersBalanceDataTable(UsersDataTable user) {
+    default UserBalanceTable toUsersBalanceDataTable(UserDataTable user) {
         if (user == null) {
             return null;
         }
-        UsersBalanceDataTable userBalance = new UsersBalanceDataTable();
+        UserBalanceTable userBalance = new UserBalanceTable();
         userBalance.setUser_id(user);
         userBalance.setBalance_usd("0");
         return userBalance;
     }
+
 
 
 

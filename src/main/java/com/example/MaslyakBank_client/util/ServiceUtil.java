@@ -1,10 +1,10 @@
 package com.example.MaslyakBank_client.util;
 
 
-import com.example.MaslyakBank_client.dto.UserDataBalanceDTO;
+import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
 import com.example.MaslyakBank_client.mappers.UserBalanceMapper;
-import com.example.MaslyakBank_client.repository.UserBalanceTableRepository;
-import com.example.MaslyakBank_client.repository.UsersDataRepository;
+import com.example.MaslyakBank_client.repository.UserBalanceRepository;
+import com.example.MaslyakBank_client.repository.UserDataRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,14 @@ import java.util.List;
 @Component
 public class ServiceUtil {
 
-    private final UserBalanceTableRepository userBalanceTableRepository;
-    private final UsersDataRepository usersDataRepository;
+    private final UserBalanceRepository userBalanceRepository;
+    private final UserDataRepository userDataRepository;
     private final UserBalanceMapper userBalanceMapper;
 
     @Autowired
-    public ServiceUtil(UserBalanceTableRepository userBalanceTableRepository, UsersDataRepository usersDataRepository, UserBalanceMapper userBalanceMapper) {
-        this.userBalanceTableRepository = userBalanceTableRepository;
-        this.usersDataRepository = usersDataRepository;
+    public ServiceUtil(UserBalanceRepository userBalanceRepository, UserDataRepository userDataRepository, UserBalanceMapper userBalanceMapper) {
+        this.userBalanceRepository = userBalanceRepository;
+        this.userDataRepository = userDataRepository;
         this.userBalanceMapper = userBalanceMapper;
     }
 
@@ -34,10 +34,10 @@ public class ServiceUtil {
     }
 
 
-    public List<UserDataBalanceDTO> getUserBalance(List<Integer> userIds) {
-        List<UserDataBalanceDTO> dtoList = new ArrayList<>();
+    public List<UserBalanceDTO> getUserBalance(List<Integer> userIds) {
+        List<UserBalanceDTO> dtoList = new ArrayList<>();
         for (int userId : userIds) {//todo
-            UserDataBalanceDTO userDataDTO = userBalanceMapper.toUserDataBalanceDTO(userBalanceTableRepository.findById(userId).orElse(null));
+            UserBalanceDTO userDataDTO = userBalanceMapper.toUserDataBalanceDTO(userBalanceRepository.findById(userId).orElse(null));
             dtoList.add(userDataDTO);
         }
         return dtoList;
