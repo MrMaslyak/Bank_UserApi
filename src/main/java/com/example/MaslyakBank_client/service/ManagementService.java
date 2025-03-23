@@ -13,6 +13,7 @@ import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceRepository;
 import com.example.MaslyakBank_client.repository.UserDataRepository;
 import com.example.MaslyakBank_client.util.ServiceUtil;
+import com.example.MaslyakBank_client.validator.UserValidator;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,7 @@ public class ManagementService {
     private final UserDataMapper  userDataMapper;
     private final UserBalanceMapper  userBalanceMapper;
     private final UserAuthTokenMapper  userAuthTokenMapper;
+    private final UserValidator userValidator;
 
     @Autowired
     public ManagementService(
@@ -42,7 +44,8 @@ public class ManagementService {
             ServiceUtil serviceUtil,
             UserDataMapper  userDataMapper,
             UserBalanceMapper  userBalanceMapper,
-            UserAuthTokenMapper  userAuthTokenMapper
+            UserAuthTokenMapper  userAuthTokenMapper,
+            UserValidator userValidator
     ) {
         this.userDataRepository = userDataRepository;
         this.userBalanceRepository = userBalanceRepository;
@@ -51,12 +54,13 @@ public class ManagementService {
         this.userDataMapper = userDataMapper;
         this.userBalanceMapper = userBalanceMapper;
         this.userAuthTokenMapper = userAuthTokenMapper;
+        this.userValidator = userValidator;
     }
 
     @PostConstruct
     public void init() {
-        log.warn("⚠️✅ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
-        log.warn("⚠️⚠️ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
+        log.warn("✅✅ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
+        log.warn("⚠️✅ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
         log.warn("⚠️⚠️ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
     }
 
@@ -79,9 +83,8 @@ public class ManagementService {
 
     public String changeLogin(int id, String newLogin) {
         try {
-            UserDataTable user = userDataRepository.findById(id)
-                    .orElseThrow(() -> new Exception("User not found"));//todo
-
+            //ушла проверка на существуещий айди и логин на уровень выше
+            UserDataTable user = userDataRepository.findById(id).get();
             user.setLogin(newLogin);
             userDataRepository.save(user);
 
@@ -94,13 +97,10 @@ public class ManagementService {
 
     public String changeEmail(int id, String newEmail) {
         try {
-            if (userDataRepository.findAll().stream().anyMatch(user -> user.getEmail().equals(newEmail))) {
-                return "Email already exists";
-            } // todo
-            else {
+            //ушла проверка на существуещий эмейл на уровень выше  todo
                 userDataRepository.changeEmail(id, newEmail);
                 return "Email changed successfully";//todo
-            }
+
         } catch (Exception e) {
             return "Error changing email: " + e.getMessage();
         }
@@ -108,10 +108,11 @@ public class ManagementService {
 
     public String deleteUserById(List<Integer> userIds) {
         try {
-            List<Integer> existingIds = userDataRepository.findAllById(userIds).stream().map(UserDataTable::getId).toList();
-            if (existingIds.isEmpty()) {
-                return "Users not found";
-            }// todo
+            //ушла проверка на существуещий айди  на уровень выше  todo
+            List<Integer> existingIds = userDataRepository.findAllById(userIds)
+                    .stream()
+                    .map(UserDataTable::getId)
+                    .toList();
             userDataRepository.deleteAllById(existingIds);
             return "Users deleted successfully";//todo
         } catch (Exception e) {
@@ -123,10 +124,7 @@ public class ManagementService {
    @Transactional
     public String createUser(UserDataDTO userDataDTO) {
         try {
-            if (userDataRepository.findAll().stream().anyMatch(user -> user.getLogin().equals(userDataDTO.getLogin()))) {
-                return "Login already exists";
-            } // todo
-
+            //ушла проверка на существуещий эмейл и логина на уровень выше  todo
             UserDataTable user = saveUser(userDataDTO);
             saveUserBalance(user);
             saveUserAuthToken(user);

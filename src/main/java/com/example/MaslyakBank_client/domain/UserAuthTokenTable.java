@@ -22,7 +22,7 @@ public class UserAuthTokenTable {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private UserDataTable user_id;
 
-    @Column(name = "token")
+    @Column(name = "token" , length = 50, nullable = false)
     private String token;
 
     @Column(name = "created_at")

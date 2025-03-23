@@ -5,10 +5,12 @@ import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
 import com.example.MaslyakBank_client.dto.tableDTOs.UserDataDTO;
 import com.example.MaslyakBank_client.dto.endpointDTOs.UserRequestDTO;
 import com.example.MaslyakBank_client.service.ManagementService;
+import com.example.MaslyakBank_client.validator.UserValidator;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,13 @@ import java.util.List;
 public class ManagementController {
 
     private final ManagementService accountManagement;
+    private final UserValidator userValidator;
+
+    @Autowired
+    public ManagementController(UserValidator userValidator, ManagementService accountManagement) {
+        this.userValidator = userValidator;
+        this.accountManagement = accountManagement;
+    }
 
     @PostConstruct
     public void init() {
@@ -46,21 +55,27 @@ public class ManagementController {
     
     @PutMapping("/change_login")
     public String changeLogin(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+        userValidator.validateLogin(userRequestDTO.getLogin());
+        userValidator.validateUserId(userRequestDTO.getUser_id());
         return accountManagement.changeLogin(userRequestDTO.getUser_id(), userRequestDTO.getLogin());
     }
 
     @PatchMapping("/change_email")
     public String changeEmail(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+        userValidator.validateEmail(userRequestDTO.getEmail());
         return accountManagement.changeEmail(userRequestDTO.getUser_id(), userRequestDTO.getEmail());
     }
 
     @DeleteMapping("/delete_user")
     public String deleteUser(@RequestBody @Valid UserRequestDTO userRequestDTO) {
+        userValidator.validateUserIds(userRequestDTO.getUsers_id());
         return accountManagement.deleteUserById(userRequestDTO.getUsers_id());
     }
 
     @PostMapping("/create_user")
     public String createUser(@RequestBody @Valid UserDataDTO userDataDTO) {
+        userValidator.validateEmail(userDataDTO.getEmail());
+        userValidator.validateLogin(userDataDTO.getLogin());
         return accountManagement.createUser(userDataDTO);
     }
 

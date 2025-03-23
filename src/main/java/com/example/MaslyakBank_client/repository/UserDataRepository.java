@@ -35,6 +35,11 @@ public interface UserDataRepository extends JpaRepository<UserDataTable, Integer
     @Override
     List<UserDataTable> findAllById(Iterable<Integer> integers);
 
+    Optional<UserDataTable> findByEmail(String email);
+    Optional<UserDataTable> findByLogin(String login);
+    Optional<UserDataTable> findById(int id);
+
+
 
 
 }

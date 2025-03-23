@@ -30,7 +30,7 @@ public class ServiceUtil {
 
     @PostConstruct
     public void init() {
-        log.warn("⚠️✅ TODO: Перенести в MapperClass создание DTO для метода getUserBalance", ServiceUtil.class.getName() + ".java");
+        log.warn("✅✅ TODO: Перенести в MapperClass создание DTO для метода getUserBalance", ServiceUtil.class.getName() + ".java");
     }
 
 

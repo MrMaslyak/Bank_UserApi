@@ -1,7 +1,9 @@
 package com.example.MaslyakBank_client.dto.endpointDTOs;
 
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.List;
