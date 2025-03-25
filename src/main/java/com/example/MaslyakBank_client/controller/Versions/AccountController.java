@@ -1,7 +1,7 @@
 package com.example.MaslyakBank_client.controller.Versions;
 
-import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserDataDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserBalanceDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserDataDTO;
 import com.example.MaslyakBank_client.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

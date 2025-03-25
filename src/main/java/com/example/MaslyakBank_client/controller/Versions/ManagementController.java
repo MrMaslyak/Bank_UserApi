@@ -1,9 +1,9 @@
 package com.example.MaslyakBank_client.controller.Versions;
 
 
-import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserDataDTO;
-import com.example.MaslyakBank_client.dto.endpointDTOs.UserRequestDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserBalanceDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserDataDTO;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserRequestDTO;
 import com.example.MaslyakBank_client.service.ManagementService;
 import com.example.MaslyakBank_client.validator.UserValidator;
 import jakarta.annotation.PostConstruct;

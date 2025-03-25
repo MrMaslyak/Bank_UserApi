@@ -2,7 +2,7 @@ package com.example.MaslyakBank_client.mappers;
 
 
 import com.example.MaslyakBank_client.domain.UserDataTable;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserDataDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserDataDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,6 +1,7 @@
-package com.example.MaslyakBank_client.dto.tableDTOs;
+package com.example.MaslyakBank_client.dto.tablesDTOs;
 
 
+import com.example.MaslyakBank_client.validator.Password;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -23,10 +24,10 @@ public class UserDataDTO {
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
     private String email;
 
-    @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
+
     @NotEmpty(message = "Password cannot be null")
     @NotBlank(message = "Password cannot be blank")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$", message = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character")
+    @Password( message = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character, 20 < symbols > 8")
     private String password;
 
     private boolean status;

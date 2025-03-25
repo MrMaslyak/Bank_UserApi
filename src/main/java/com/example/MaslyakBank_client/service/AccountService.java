@@ -2,8 +2,8 @@ package com.example.MaslyakBank_client.service;
 
 
 import com.example.MaslyakBank_client.domain.UserDataTable;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserDataDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserBalanceDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserDataDTO;
 import com.example.MaslyakBank_client.mappers.UserDataMapper;
 import com.example.MaslyakBank_client.repository.UserDataRepository;
 import com.example.MaslyakBank_client.util.ServiceUtil;

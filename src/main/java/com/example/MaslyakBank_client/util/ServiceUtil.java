@@ -1,7 +1,7 @@
 package com.example.MaslyakBank_client.util;
 
 
-import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserBalanceDTO;
 import com.example.MaslyakBank_client.mappers.UserBalanceMapper;
 import com.example.MaslyakBank_client.repository.UserBalanceRepository;
 import com.example.MaslyakBank_client.repository.UserDataRepository;

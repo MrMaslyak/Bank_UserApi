@@ -1,4 +1,4 @@
-package com.example.MaslyakBank_client.dto.tableDTOs;
+package com.example.MaslyakBank_client.dto.tablesDTOs;
 
 
 import com.example.MaslyakBank_client.domain.UserDataTable;

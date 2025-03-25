@@ -1,4 +1,4 @@
-package com.example.MaslyakBank_client.dto.endpointDTOs;
+package com.example.MaslyakBank_client.dto.endpointsDTOs;
 
 
 import jakarta.validation.constraints.Min;

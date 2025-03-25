@@ -3,7 +3,7 @@ package com.example.MaslyakBank_client.mappers;
 
 import com.example.MaslyakBank_client.domain.UserAuthTokenTable;
 import com.example.MaslyakBank_client.domain.UserDataTable;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserAuthTokenDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserAuthTokenDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

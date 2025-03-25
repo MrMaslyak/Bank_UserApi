@@ -3,9 +3,9 @@ package com.example.MaslyakBank_client.service;
 import com.example.MaslyakBank_client.domain.UserAuthTokenTable;
 import com.example.MaslyakBank_client.domain.UserBalanceTable;
 import com.example.MaslyakBank_client.domain.UserDataTable;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserBalanceDTO;
-import com.example.MaslyakBank_client.dto.tableDTOs.UserDataDTO;
-import com.example.MaslyakBank_client.dto.endpointDTOs.UserRequestDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserBalanceDTO;
+import com.example.MaslyakBank_client.dto.tablesDTOs.UserDataDTO;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserRequestDTO;
 import com.example.MaslyakBank_client.mappers.UserAuthTokenMapper;
 import com.example.MaslyakBank_client.mappers.UserBalanceMapper;
 import com.example.MaslyakBank_client.mappers.UserDataMapper;
@@ -60,7 +60,7 @@ public class ManagementService {
     @PostConstruct
     public void init() {
         log.warn("✅✅ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
-        log.warn("⚠️✅ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
+        log.warn("✅✅ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
         log.warn("⚠️⚠️ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
     }
 

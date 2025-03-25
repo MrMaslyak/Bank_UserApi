@@ -1,7 +1,7 @@
 package com.example.MaslyakBank_client.validator;
 
 import com.example.MaslyakBank_client.domain.UserDataTable;
-import com.example.MaslyakBank_client.dto.endpointDTOs.UserRequestDTO;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserRequestDTO;
 import com.example.MaslyakBank_client.repository.UserDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
