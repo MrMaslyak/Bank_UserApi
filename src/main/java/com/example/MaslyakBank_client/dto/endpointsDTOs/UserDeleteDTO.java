@@ -12,4 +12,5 @@ public class UserDeleteDTO {
 
     @NotEmpty(message = "Users ID cannot be null")
     private List<Integer> users_id;
+
 }

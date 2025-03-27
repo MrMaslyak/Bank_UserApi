@@ -35,12 +35,14 @@ public class ManagementController {
 
     @PostConstruct
     public void init() {
-        log.warn("⚠️⚠️ TODO: Дорозабраться с валидации листа DTO", ManagementController.class.getName() + ".java");
-        log.warn("⚠️✅ TODO: Поменять @PostMapping в /update_status на @PutMapping({}:{})", ManagementController.class.getName() + ".java");
-        log.warn("⚠️✅ TODO: Поменять @PutMapping в /change_login на @PatchMapping", ManagementController.class.getName() + ".java");
-        log.warn("⚠️✅ TODO: Сделать новый нейминг во все CRUD endpoints с user -> /user ", ManagementController.class.getName() + ".java");
-        log.warn("⚠️✅ TODO: Сделать новый нейминг во все change секьюрные данные -> /user/change/email и status и password ", ManagementController.class.getName() + ".java");
-        log.warn("⚠️✅ TODO: Создать под каждый endpoint свой DTO, который будет валидировать", ManagementController.class.getName() + ".java");
+        log.warn("⚠️⚠️ TODO: Дорозабраться с валидации листа  List<UserChangeStatusDTO>", ManagementController.class.getName() + ".java");
+        log.warn("✅✅ TODO: Поменять @PostMapping в /update_status на @PutMapping({}:{})", ManagementController.class.getName() + ".java");
+        log.warn("✅✅ TODO: Поменять @PutMapping в /change_login на @PatchMapping", ManagementController.class.getName() + ".java");
+        log.warn("✅✅ TODO: Сделать новый нейминг во все CRUD endpoints с user -> /user ", ManagementController.class.getName() + ".java");
+        log.warn("✅✅ TODO: Сделать новый нейминг во все change секьюрные данные -> /user/change/email и status и password ", ManagementController.class.getName() + ".java");
+        log.warn("✅✅ TODO: Создать под каждый endpoint свой DTO, который будет валидировать", ManagementController.class.getName() + ".java");
+        log.warn("⚠️️⚠️⚠️ TODO: Пофиксить @PutMapping(\"/change/status\") чтобы он возвращал список айди которые не удалось исполнять а остальные должны высполняться и все это через PUT", ManagementController.class.getName() + ".java");
+        log.warn("⚠️️⚠️⚠️ TODO: Создать отдельный ендпоинт @PostMapping для (\"/change/status\")", ManagementController.class.getName() + ".java");
     }
 
 

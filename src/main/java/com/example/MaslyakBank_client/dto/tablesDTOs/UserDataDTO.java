@@ -1,7 +1,7 @@
 package com.example.MaslyakBank_client.dto.tablesDTOs;
 
 
-import com.example.MaslyakBank_client.validator.Password;
+import com.example.MaslyakBank_client.validator.annotations.Password;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 

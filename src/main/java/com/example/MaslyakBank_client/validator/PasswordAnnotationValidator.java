@@ -1,5 +1,6 @@
 package com.example.MaslyakBank_client.validator;
 
+import com.example.MaslyakBank_client.validator.annotations.Password;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

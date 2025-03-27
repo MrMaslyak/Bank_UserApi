@@ -1,6 +1,7 @@
-package com.example.MaslyakBank_client.validator;
+package com.example.MaslyakBank_client.validator.annotations;
 
 
+import com.example.MaslyakBank_client.validator.PasswordAnnotationValidator;
 import jakarta.validation.Constraint;
 
 import java.lang.annotation.Documented;
@@ -22,6 +23,7 @@ public @interface Password {
 
     int min() default 8;
     int max() default 20;
+
 
 
 }
