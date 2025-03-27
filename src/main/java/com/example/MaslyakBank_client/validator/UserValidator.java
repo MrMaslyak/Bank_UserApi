@@ -1,7 +1,7 @@
 package com.example.MaslyakBank_client.validator;
 
 import com.example.MaslyakBank_client.domain.UserDataTable;
-import com.example.MaslyakBank_client.dto.endpointsDTOs.UserRequestDTO;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserChangeStatusDTO;
 import com.example.MaslyakBank_client.repository.UserDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,33 +23,12 @@ public class UserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return UserRequestDTO.class.equals(clazz);
+        return UserDataTable.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        UserRequestDTO user = (UserRequestDTO) target;
-        validateEmail(user.getEmail(), errors);
-        validateLogin(user.getLogin(), errors);
-        validateUserId(user.getUser_id(), errors);
-    }
 
-    public void validateEmail(String email, Errors errors) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            errors.rejectValue("email", "Duplicate.email.database", "Email уже используется");
-        }
-    }
-
-    public void validateLogin(String login, Errors errors) {
-        if (userRepository.findByLogin(login).isPresent()) {
-            errors.rejectValue("login", "Duplicate.login.database", "Login уже используется");
-        }
-    }
-
-    public void validateUserId(Integer userId, Errors errors) {
-        if (userId == 0 || userRepository.findById(userId).isEmpty()) {
-            errors.rejectValue("user_id", "Duplicate.user_id.database", "Пользователя с таким id не существует");
-        }
     }
 
     public void validateEmail(String email) {
@@ -88,5 +67,27 @@ public class UserValidator implements Validator {
             throw new IllegalArgumentException("Some users were not found");
         }
     }
+
+    public void validateUserStatusList(List<UserChangeStatusDTO> userChangeStatusDTOList) {
+        if (userChangeStatusDTOList == null || userChangeStatusDTOList.isEmpty()) {
+            throw new IllegalArgumentException("User list cannot be null or empty");
+        }
+
+        List<Integer> userIds = userChangeStatusDTOList.stream()
+                .map(UserChangeStatusDTO::getUser_id)
+                .toList();
+
+        List<Integer> existingIds = userRepository.findAllById(userIds)
+                .stream()
+                .map(UserDataTable::getId)
+                .toList();
+
+        if (existingIds.size() != userIds.size()) {
+            throw new IllegalArgumentException("Some users were not found");
+        }
+    }
+
+
+
 
 }

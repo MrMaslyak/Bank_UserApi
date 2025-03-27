@@ -3,9 +3,9 @@ package com.example.MaslyakBank_client.service;
 import com.example.MaslyakBank_client.domain.UserAuthTokenTable;
 import com.example.MaslyakBank_client.domain.UserBalanceTable;
 import com.example.MaslyakBank_client.domain.UserDataTable;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserChangeStatusDTO;
 import com.example.MaslyakBank_client.dto.tablesDTOs.UserBalanceDTO;
 import com.example.MaslyakBank_client.dto.tablesDTOs.UserDataDTO;
-import com.example.MaslyakBank_client.dto.endpointsDTOs.UserRequestDTO;
 import com.example.MaslyakBank_client.mappers.UserAuthTokenMapper;
 import com.example.MaslyakBank_client.mappers.UserBalanceMapper;
 import com.example.MaslyakBank_client.mappers.UserDataMapper;
@@ -13,7 +13,6 @@ import com.example.MaslyakBank_client.repository.UserAuthTokenRepository;
 import com.example.MaslyakBank_client.repository.UserBalanceRepository;
 import com.example.MaslyakBank_client.repository.UserDataRepository;
 import com.example.MaslyakBank_client.util.ServiceUtil;
-import com.example.MaslyakBank_client.validator.UserValidator;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +29,10 @@ public class ManagementService {
     private final UserDataRepository userDataRepository;
     private final UserBalanceRepository userBalanceRepository;
     private final UserAuthTokenRepository userAuthTokenRepository;
-    private final ServiceUtil  serviceUtil;
-    private final UserDataMapper  userDataMapper;
-    private final UserBalanceMapper  userBalanceMapper;
-    private final UserAuthTokenMapper  userAuthTokenMapper;
-    private final UserValidator userValidator;
+    private final ServiceUtil serviceUtil;
+    private final UserDataMapper userDataMapper;
+    private final UserBalanceMapper userBalanceMapper;
+    private final UserAuthTokenMapper userAuthTokenMapper;
 
     @Autowired
     public ManagementService(
@@ -42,10 +40,9 @@ public class ManagementService {
             UserBalanceRepository userBalanceRepository,
             UserAuthTokenRepository userAuthTokenRepository,
             ServiceUtil serviceUtil,
-            UserDataMapper  userDataMapper,
-            UserBalanceMapper  userBalanceMapper,
-            UserAuthTokenMapper  userAuthTokenMapper,
-            UserValidator userValidator
+            UserDataMapper userDataMapper,
+            UserBalanceMapper userBalanceMapper,
+            UserAuthTokenMapper userAuthTokenMapper
     ) {
         this.userDataRepository = userDataRepository;
         this.userBalanceRepository = userBalanceRepository;
@@ -54,7 +51,6 @@ public class ManagementService {
         this.userDataMapper = userDataMapper;
         this.userBalanceMapper = userBalanceMapper;
         this.userAuthTokenMapper = userAuthTokenMapper;
-        this.userValidator = userValidator;
     }
 
     @PostConstruct
@@ -69,11 +65,24 @@ public class ManagementService {
     }
 
 
-    public String updateUserStatus(List<UserRequestDTO> userData) {
+    public String changeStatus(List<UserChangeStatusDTO> userData) {
         try {
-            for (UserRequestDTO user : userData) {
-                userDataRepository.setStatus(user.getUser_id(), user.isGetStatus());
+            List<UserDataTable> usersToUpdate = userDataRepository.findAllById(
+                    userData.stream().map(UserChangeStatusDTO::getUser_id).toList()
+            );
+
+            for (UserDataTable user : usersToUpdate) {
+                UserChangeStatusDTO dto = userData.stream()
+                        .filter(u -> u.getUser_id() == user.getId())
+                        .findFirst()
+                        .orElse(null);
+
+                if (dto != null) {
+                    user.setStatus(dto.isGetStatus());
+                }
             }
+
+            userDataRepository.saveAll(usersToUpdate);
             return "Status updated successfully";//todo
         } catch (Exception e) {
             return "Error updating status: " + e.getMessage();
@@ -81,13 +90,10 @@ public class ManagementService {
     }
 
 
-    public String changeLogin(int id, String newLogin) {
+    public String changeDataUser(int id, String newLogin) {
         try {
             //ушла проверка на существуещий айди и логин на уровень выше
-            UserDataTable user = userDataRepository.findById(id).get();
-            user.setLogin(newLogin);
-            userDataRepository.save(user);
-
+            userDataRepository.changeLogin(id, newLogin);
             return "Login updated successfully";//todo
         } catch (Exception e) {
             return "Error updating login: " + e.getMessage();
@@ -98,8 +104,11 @@ public class ManagementService {
     public String changeEmail(int id, String newEmail) {
         try {
             //ушла проверка на существуещий эмейл на уровень выше  todo
-                userDataRepository.changeEmail(id, newEmail);
-                return "Email changed successfully";//todo
+            UserDataTable user = userDataRepository.findById(id).get();
+            user.setEmail(newEmail);
+            userDataRepository.save(user);
+
+            return "Email changed successfully";//todo
 
         } catch (Exception e) {
             return "Error changing email: " + e.getMessage();
@@ -121,7 +130,7 @@ public class ManagementService {
     }
 
 
-   @Transactional
+    @Transactional
     public String createUser(UserDataDTO userDataDTO) {
         try {
             //ушла проверка на существуещий эмейл и логина на уровень выше  todo
@@ -149,9 +158,6 @@ public class ManagementService {
         UserAuthTokenTable userAuthToken = userAuthTokenMapper.toUsersAuthTokenTable(user);
         userAuthTokenRepository.save(userAuthToken);
     }
-
-
-
 
 
 }

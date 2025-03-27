@@ -25,9 +25,11 @@ public interface UserDataRepository extends JpaRepository<UserDataTable, Integer
     @Query("UPDATE UserDataTable u SET u.email = :newEmail WHERE u.id = :userId")
     void changeEmail(@Param("userId") int userId, @Param("newEmail") String newEmail);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE UserDataTable u SET u.login = :newLogin WHERE u.id = :userId")
+    void changeLogin(@Param("userId") int userId, @Param("newLogin") String newLogin);
 
-    @Query("SELECT u.login FROM UserDataTable u WHERE u.id = :userId")
-    Optional<String> findLoginByUserId(@Param("userId") Integer userId);
 
     @Override
     List<UserDataTable> findAll();

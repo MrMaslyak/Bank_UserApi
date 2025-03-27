@@ -6,10 +6,9 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class UserRequestDTO {
+public class UserChangeDTO {
+
 
     @Min(value = 1, message = "User ID must be greater than 0")
     private Integer user_id;
@@ -17,14 +16,4 @@ public class UserRequestDTO {
     @Size(min = 4, max = 20, message = "Login must be between 4 and 20 characters")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Login must contain only letters and numbers")
     private String login;
-
-
-    @Size(max = 50, message = "Email must be at most 50 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
-    private String email;
-
-    private List<Integer> users_id;
-    private List<String> logins;
-
-    private boolean getStatus;
 }

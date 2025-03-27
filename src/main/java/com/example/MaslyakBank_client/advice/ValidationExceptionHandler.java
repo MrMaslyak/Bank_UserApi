@@ -1,6 +1,7 @@
 package com.example.MaslyakBank_client.advice;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class ValidationExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {//todo
 
         Map<String, String> errors = new HashMap<>();
