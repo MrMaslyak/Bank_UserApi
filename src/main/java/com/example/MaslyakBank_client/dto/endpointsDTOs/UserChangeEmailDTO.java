@@ -1,9 +1,11 @@
 package com.example.MaslyakBank_client.dto.endpointsDTOs;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class UserChangeEmailDTO {
 
     @Min(value = 1, message = "User ID must be greater than 0")

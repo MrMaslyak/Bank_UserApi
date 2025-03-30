@@ -2,6 +2,7 @@ package com.example.MaslyakBank_client.dto.tablesDTOs;
 
 
 import com.example.MaslyakBank_client.validator.annotations.Password;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import lombok.Data;
 public class UserDataDTO {
 
     @Min(value = 1, message = "User ID must be greater than 0")
+    @JsonIgnore
     private Integer user_id;
 
     @Size(min = 4, max = 20, message = "Login must be between 4 and 20 characters")

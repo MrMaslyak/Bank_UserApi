@@ -3,7 +3,10 @@ package com.example.MaslyakBank_client.service;
 import com.example.MaslyakBank_client.domain.UserAuthTokenTable;
 import com.example.MaslyakBank_client.domain.UserBalanceTable;
 import com.example.MaslyakBank_client.domain.UserDataTable;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserChangeDTO;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserChangeEmailDTO;
 import com.example.MaslyakBank_client.dto.endpointsDTOs.UserChangeStatusDTO;
+import com.example.MaslyakBank_client.dto.endpointsDTOs.UserDeleteDTO;
 import com.example.MaslyakBank_client.dto.tablesDTOs.UserBalanceDTO;
 import com.example.MaslyakBank_client.dto.tablesDTOs.UserDataDTO;
 import com.example.MaslyakBank_client.mappers.UserAuthTokenMapper;
@@ -17,6 +20,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,7 +61,7 @@ public class ManagementService {
     public void init() {
         log.warn("✅✅ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
         log.warn("✅✅ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
-        log.warn("⚠️⚠️ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
+        log.warn("⚠️✅ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
     }
 
     public List<UserBalanceDTO> getUserBalance(List<Integer> userIds) {
@@ -65,7 +69,7 @@ public class ManagementService {
     }
 
 
-    public String changeStatus(List<UserChangeStatusDTO> userData) {
+    public  List<UserChangeStatusDTO> changeStatus(List<UserChangeStatusDTO> userData) {
         try {
             List<UserDataTable> usersToUpdate = userDataRepository.findAllById(
                     userData.stream().map(UserChangeStatusDTO::getUser_id).toList()
@@ -83,39 +87,40 @@ public class ManagementService {
             }
 
             userDataRepository.saveAll(usersToUpdate);
-            return "Status updated successfully";//todo
+
+
+            return userData;//todo
         } catch (Exception e) {
-            return "Error updating status: " + e.getMessage();
+            throw new RuntimeException("Error updating user status: " + e.getMessage());
         }
     }
 
 
-    public String changeDataUser(int id, String newLogin) {
-        try {
-            //ушла проверка на существуещий айди и логин на уровень выше
-            userDataRepository.changeLogin(id, newLogin);
-            return "Login updated successfully";//todo
-        } catch (Exception e) {
-            return "Error updating login: " + e.getMessage();
+        public UserChangeDTO changeDataUser(int id, String newLogin) {
+            try {
+                //ушла проверка на существуещий айди и логин на уровень выше
+                userDataRepository.changeLogin(id, newLogin);
+                return new UserChangeDTO(id, newLogin);//todo
+            } catch (Exception e) {
+                throw new RuntimeException("Error changing user data: " + e.getMessage());
+            }
         }
-    }
 
 
-    public String changeEmail(int id, String newEmail) {
+    public UserChangeEmailDTO changeEmail(int id, String newEmail) {
         try {
             //ушла проверка на существуещий эмейл на уровень выше  todo
             UserDataTable user = userDataRepository.findById(id).get();
             user.setEmail(newEmail);
             userDataRepository.save(user);
 
-            return "Email changed successfully";//todo
-
+            return new UserChangeEmailDTO(id, newEmail);
         } catch (Exception e) {
-            return "Error changing email: " + e.getMessage();
+            throw new RuntimeException("Error changing user email: " + e.getMessage());
         }
     }
 
-    public String deleteUserById(List<Integer> userIds) {
+    public UserDeleteDTO deleteUserById(List<Integer> userIds) {
         try {
             //ушла проверка на существуещий айди  на уровень выше  todo
             List<Integer> existingIds = userDataRepository.findAllById(userIds)
@@ -123,24 +128,24 @@ public class ManagementService {
                     .map(UserDataTable::getId)
                     .toList();
             userDataRepository.deleteAllById(existingIds);
-            return "Users deleted successfully";//todo
+            return new UserDeleteDTO(userIds, "Users deleted successfully");//todo
         } catch (Exception e) {
-            return "Error deleting users: " + e.getMessage();
+            return new UserDeleteDTO(userIds, "Error deleting users: " + e.getMessage());
         }
     }
 
 
     @Transactional
-    public String createUser(UserDataDTO userDataDTO) {
+    public UserDataDTO createUser(UserDataDTO userDataDTO) {
         try {
             //ушла проверка на существуещий эмейл и логина на уровень выше  todo
             UserDataTable user = saveUser(userDataDTO);
             saveUserBalance(user);
             saveUserAuthToken(user);
 
-            return "User created successfully";//todo
+            return userDataDTO;//todo
         } catch (Exception e) {
-            return "Error creating user: " + e.getMessage();
+            throw new RuntimeException("Error creating user: " + e.getMessage());
         }
     }
 

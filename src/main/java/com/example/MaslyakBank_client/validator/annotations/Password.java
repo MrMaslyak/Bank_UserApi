@@ -1,7 +1,7 @@
 package com.example.MaslyakBank_client.validator.annotations;
 
 
-import com.example.MaslyakBank_client.validator.PasswordAnnotationValidator;
+import com.example.MaslyakBank_client.validator.process.PasswordAnnotationValidator;
 import jakarta.validation.Constraint;
 
 import java.lang.annotation.Documented;

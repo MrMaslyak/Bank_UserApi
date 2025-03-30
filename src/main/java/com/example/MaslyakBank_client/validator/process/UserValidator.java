@@ -1,4 +1,4 @@
-package com.example.MaslyakBank_client.validator;
+package com.example.MaslyakBank_client.validator.process;
 
 import com.example.MaslyakBank_client.domain.UserDataTable;
 import com.example.MaslyakBank_client.dto.endpointsDTOs.UserChangeStatusDTO;

@@ -1,4 +1,4 @@
-package com.example.MaslyakBank_client.validator;
+package com.example.MaslyakBank_client.validator.process;
 
 import com.example.MaslyakBank_client.validator.annotations.Password;
 import jakarta.validation.ConstraintValidator;
