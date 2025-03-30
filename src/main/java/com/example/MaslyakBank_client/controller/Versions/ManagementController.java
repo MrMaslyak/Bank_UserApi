@@ -60,14 +60,14 @@ public class ManagementController {
     public UserChangeDTO changeDataUser(@RequestBody @Valid UserChangeDTO userChangeDTO) {
         userValidator.validateLogin(userChangeDTO.getLogin());
         userValidator.validateUserId(userChangeDTO.getUser_id());
-        return accountManagement.changeDataUser(userChangeDTO.getUser_id(), userChangeDTO.getLogin());
+        return accountManagement.changeDataUser(userChangeDTO.getUser_id(), userChangeDTO.getLogin(), userChangeDTO);
     }
 
     @PutMapping("/change/email")
     public UserChangeEmailDTO changeEmail(@RequestBody @Valid UserChangeEmailDTO userChangeEmailDTO) {
         userValidator.validateEmail(userChangeEmailDTO.getEmail());
         userValidator.validateUserId(userChangeEmailDTO.getUser_id());
-        return accountManagement.changeEmail(userChangeEmailDTO.getUser_id(), userChangeEmailDTO.getEmail());
+        return accountManagement.changeEmail(userChangeEmailDTO.getUser_id(), userChangeEmailDTO.getEmail(), userChangeEmailDTO);
     }
 
     @DeleteMapping("/user")

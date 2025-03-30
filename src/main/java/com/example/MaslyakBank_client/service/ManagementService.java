@@ -96,25 +96,25 @@ public class ManagementService {
     }
 
 
-        public UserChangeDTO changeDataUser(int id, String newLogin) {
+        public UserChangeDTO changeDataUser(int id, String newLogin, UserChangeDTO userChangeDTO) {
             try {
                 //ушла проверка на существуещий айди и логин на уровень выше
                 userDataRepository.changeLogin(id, newLogin);
-                return new UserChangeDTO(id, newLogin);//todo
+                return userChangeDTO;//todo
             } catch (Exception e) {
                 throw new RuntimeException("Error changing user data: " + e.getMessage());
             }
         }
 
 
-    public UserChangeEmailDTO changeEmail(int id, String newEmail) {
+    public UserChangeEmailDTO changeEmail(int id, String newEmail, UserChangeEmailDTO userChangeEmailDTO) {
         try {
             //ушла проверка на существуещий эмейл на уровень выше  todo
             UserDataTable user = userDataRepository.findById(id).get();
             user.setEmail(newEmail);
             userDataRepository.save(user);
 
-            return new UserChangeEmailDTO(id, newEmail);
+            return userChangeEmailDTO;
         } catch (Exception e) {
             throw new RuntimeException("Error changing user email: " + e.getMessage());
         }
