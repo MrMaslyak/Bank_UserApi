@@ -10,7 +10,6 @@ import lombok.Data;
 public class UserDataDTO {
 
     @Min(value = 1, message = "User ID must be greater than 0")
-    @JsonIgnore
     private Integer user_id;
 
     @Size(min = 4, max = 20, message = "Login must be between 4 and 20 characters")
@@ -30,6 +29,7 @@ public class UserDataDTO {
     @NotEmpty(message = "Password cannot be null")
     @NotBlank(message = "Password cannot be blank")
     @Password( message = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character, 20 < symbols > 8")
+    @JsonIgnore
     private String password;
 
     private boolean status;

@@ -33,19 +33,19 @@ public class UserValidator implements Validator {
 
     public void validateEmail(String email) {
         if (userRepository.findByEmail(email).isPresent()) {
-            throw new IllegalArgumentException("Email already exist");
+            throw new IllegalArgumentException("Email already exist");//todo 400 request MethodArgumentNotValidException
         }
     }
 
     public void validateLogin(String login) {
         if (userRepository.findByLogin(login).isPresent()) {
-            throw new IllegalArgumentException("Login already exist");
+            throw new IllegalArgumentException("Login already exist");//todo 400 request MethodArgumentNotValidException
         }
     }
 
     public void validateUserId(Integer userId) {
         if (userId == 0 || userRepository.findById(userId).isEmpty()) {
-            throw new IllegalArgumentException("User with this id not exist");
+            throw new IllegalArgumentException("User with this id not exist");//todo 400 request MethodArgumentNotValidException
         }
     }
 
@@ -68,7 +68,7 @@ public class UserValidator implements Validator {
         }
     }
 
-    public void validateUserStatusList(List<UserChangeStatusDTO> userChangeStatusDTOList) {
+    public void validateUserStatusList(List<UserChangeStatusDTO> userChangeStatusDTOList) {//todo уникальные айди не повторяються тут вся логика снутри листа юзеров статусов
         if (userChangeStatusDTOList == null || userChangeStatusDTOList.isEmpty()) {
             throw new IllegalArgumentException("User list cannot be null or empty");
         }

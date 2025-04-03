@@ -50,7 +50,7 @@ public class ManagementController {
         return accountManagement.getUserBalance(userIds);
     }
 
-    @PutMapping("/change/status")
+    @PutMapping("/change/status")// /user/change/status //todo не понятно чего меняется статус
     public  List<UserChangeStatusDTO> changeStatus(@RequestBody  List<UserChangeStatusDTO> userChangeStatusDTOList) {//todo
         userValidator.validateUserStatusList(userChangeStatusDTOList);
         return accountManagement.changeStatus(userChangeStatusDTOList);
@@ -63,7 +63,7 @@ public class ManagementController {
         return accountManagement.changeDataUser(userChangeDTO.getUser_id(), userChangeDTO.getLogin(), userChangeDTO);
     }
 
-    @PutMapping("/change/email")
+    @PutMapping("/change/email")// /user/change/status //todo не понятно чего меняется емейл
     public UserChangeEmailDTO changeEmail(@RequestBody @Valid UserChangeEmailDTO userChangeEmailDTO) {
         userValidator.validateEmail(userChangeEmailDTO.getEmail());
         userValidator.validateUserId(userChangeEmailDTO.getUser_id());

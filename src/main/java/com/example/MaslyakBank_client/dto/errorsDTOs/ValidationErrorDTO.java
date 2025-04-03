@@ -4,7 +4,6 @@ package com.example.MaslyakBank_client.dto.errorsDTOs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Map;
 
 @Data

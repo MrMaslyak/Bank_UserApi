@@ -3,13 +3,13 @@ package com.example.MaslyakBank_client.advice;
 import com.example.MaslyakBank_client.dto.errorsDTOs.GenericErrorDTO;
 import com.example.MaslyakBank_client.dto.errorsDTOs.ValidationErrorDTO;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -25,8 +25,10 @@ public class ValidationExceptionHandler {
         log.warn("⚠️✅ TODO: Передавать JSON вывод ошибки в формате errorCode: Integer; errorMessage: String; errorDetails?: String[]", ValidationExceptionHandler.class.getName() + ".java");
     }
 
+
+
     @ExceptionHandler({MethodArgumentNotValidException.class})//для @Valid @RequestBody
-    public ResponseEntity<ValidationErrorDTO> handleValidationMethodArgumentExceptions(MethodArgumentNotValidException ex) {//todo
+    public ResponseEntity<ValidationErrorDTO> handleValidationMethodArgumentExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error -> {
             errors.put(error.getField(), error.getDefaultMessage());
@@ -53,7 +55,7 @@ public class ValidationExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<GenericErrorDTO> handleGenericException(Exception ex) {
+    public ResponseEntity<GenericErrorDTO> handleGenericException() {
         GenericErrorDTO response = new GenericErrorDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Internal server error");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);

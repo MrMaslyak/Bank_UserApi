@@ -81,14 +81,14 @@ public class ManagementService {
                         .orElse(null);
 
                 if (dto != null) {
-                    user.setStatus(dto.isGetStatus());
+                    user.setStatus(dto.isStatus());
                 }
             }
 
             userDataRepository.saveAll(usersToUpdate);
 
 
-            return userData;//todo
+            return userData;
         } catch (Exception e) {
             throw new RuntimeException("Error updating user status: " + e.getMessage());
         }
@@ -97,7 +97,6 @@ public class ManagementService {
 
         public UserChangeDTO changeDataUser(int id, String newLogin, UserChangeDTO userChangeDTO) {
             try {
-                //ушла проверка на существуещий айди и логин на уровень выше
                 userDataRepository.changeLogin(id, newLogin);
                 return userChangeDTO;//todo
             } catch (Exception e) {
@@ -108,7 +107,6 @@ public class ManagementService {
 
     public UserChangeEmailDTO changeEmail(int id, String newEmail, UserChangeEmailDTO userChangeEmailDTO) {
         try {
-            //ушла проверка на существуещий эмейл на уровень выше  todo
             UserDataTable user = userDataRepository.findById(id).get();
             user.setEmail(newEmail);
             userDataRepository.save(user);
@@ -121,13 +119,13 @@ public class ManagementService {
 
     public UserDeleteDTO deleteUserById(List<Integer> userIds) {
         try {
-            //ушла проверка на существуещий айди  на уровень выше  todo
+
             List<Integer> existingIds = userDataRepository.findAllById(userIds)
                     .stream()
                     .map(UserDataTable::getId)
                     .toList();
             userDataRepository.deleteAllById(existingIds);
-            return new UserDeleteDTO(userIds, "Users deleted successfully");//todo
+            return new UserDeleteDTO(userIds, "Users deleted successfully");
         } catch (Exception e) {
             return new UserDeleteDTO(userIds, "Error deleting users: " + e.getMessage());
         }
@@ -137,28 +135,29 @@ public class ManagementService {
     @Transactional
     public UserDataDTO createUser(UserDataDTO userDataDTO) {
         try {
-            //ушла проверка на существуещий эмейл и логина на уровень выше  todo
+
             UserDataTable user = saveUser(userDataDTO);
+            userDataDTO.setUser_id(user.getId());
             saveUserBalance(user);
             saveUserAuthToken(user);
 
-            return userDataDTO;//todo
+            return userDataDTO;
         } catch (Exception e) {
             throw new RuntimeException("Error creating user: " + e.getMessage());
         }
     }
 
-    private UserDataTable saveUser(UserDataDTO userDataDTO) { //todo
+    private UserDataTable saveUser(UserDataDTO userDataDTO) {
         UserDataTable user = userDataMapper.toUsersDataTable(userDataDTO);
         return userDataRepository.save(user);
     }
 
-    private void saveUserBalance(UserDataTable user) { //todo
+    private void saveUserBalance(UserDataTable user) {
         UserBalanceTable userBalance = userBalanceMapper.toUsersBalanceDataTable(user);
         userBalanceRepository.save(userBalance);
     }
 
-    private void saveUserAuthToken(UserDataTable user) { //todo
+    private void saveUserAuthToken(UserDataTable user) {
         UserAuthTokenTable userAuthToken = userAuthTokenMapper.toUsersAuthTokenTable(user);
         userAuthTokenRepository.save(userAuthToken);
     }
