@@ -2,12 +2,14 @@ package com.example.MaslyakBank_client.validator.process;
 
 import com.example.MaslyakBank_client.domain.UserDataTable;
 import com.example.MaslyakBank_client.dto.endpointsDTOs.UserChangeStatusDTO;
+import com.example.MaslyakBank_client.exceptions.AlreadyExistException;
 import com.example.MaslyakBank_client.repository.UserDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -31,21 +33,21 @@ public class UserValidator implements Validator {
 
     }
 
-    public void validateEmail(String email) {
+    public void validateEmail(String email){
         if (userRepository.findByEmail(email).isPresent()) {
-            throw new IllegalArgumentException("Email already exist");//todo 400 request MethodArgumentNotValidException
+            throw new AlreadyExistException("Email");
         }
     }
 
-    public void validateLogin(String login) {
+    public void validateLogin(String login)  {
         if (userRepository.findByLogin(login).isPresent()) {
-            throw new IllegalArgumentException("Login already exist");//todo 400 request MethodArgumentNotValidException
+            throw new AlreadyExistException("Login");
         }
     }
 
-    public void validateUserId(Integer userId) {
+    public void validateUserId(Integer userId)  {
         if (userId == 0 || userRepository.findById(userId).isEmpty()) {
-            throw new IllegalArgumentException("User with this id not exist");//todo 400 request MethodArgumentNotValidException
+            throw new IllegalArgumentException("User not found");
         }
     }
 
@@ -68,9 +70,16 @@ public class UserValidator implements Validator {
         }
     }
 
-    public void validateUserStatusList(List<UserChangeStatusDTO> userChangeStatusDTOList) {//todo уникальные айди не повторяються тут вся логика снутри листа юзеров статусов
+    public void validateUserStatusList(List<UserChangeStatusDTO> userChangeStatusDTOList) {//todo - complete уникальные айди не повторяються тут вся логика снутри листа юзеров статусов
         if (userChangeStatusDTOList == null || userChangeStatusDTOList.isEmpty()) {
             throw new IllegalArgumentException("User list cannot be null or empty");
+        }
+        HashSet<Integer> uniqueIds = new HashSet<>();
+        for (UserChangeStatusDTO userChangeStatusDTO : userChangeStatusDTOList) {
+            validateUserId(userChangeStatusDTO.getUser_id());
+            if (!uniqueIds.add(userChangeStatusDTO.getUser_id())) {
+                throw new IllegalArgumentException("Duplicate user IDs found");
+            }
         }
 
         List<Integer> userIds = userChangeStatusDTOList.stream()

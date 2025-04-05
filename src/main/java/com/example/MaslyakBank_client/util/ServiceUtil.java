@@ -36,7 +36,7 @@ public class ServiceUtil {
 
     public List<UserBalanceDTO> getUserBalance(List<Integer> userIds) {
         List<UserBalanceDTO> dtoList = new ArrayList<>();
-        for (int userId : userIds) {//todo
+        for (int userId : userIds) {
             UserBalanceDTO userDataDTO = userBalanceMapper.toUserDataBalanceDTO(userBalanceRepository.findById(userId).orElse(null));
             dtoList.add(userDataDTO);
         }

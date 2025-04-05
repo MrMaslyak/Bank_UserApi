@@ -58,9 +58,9 @@ public class ManagementService {
 
     @PostConstruct
     public void init() {
-        log.warn("✅✅ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
-        log.warn("✅✅ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
-        log.warn("⚠️✅ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
+        log.info("✅✅ TODO: В методе saveUser, saveUserBalance, saveUserAuthToken превращение в другой обьект - должен заменить MapperClass", ManagementService.class.getName() + ".java");
+        log.info("✅✅ TODO: Все if-else, которые связаны с валидацией должны быть переведены в отдельный класс Validator и оттудого вызываться методы про эту валидацию должны", ManagementService.class.getName() + ".java");
+        log.info("✅✅ TODO: Все Успешные ответы сервера перевести в формат JSON при выводе правильно подставить что выводить", ManagementService.class.getName() + ".java");
     }
 
     public List<UserBalanceDTO> getUserBalance(List<Integer> userIds) {
@@ -98,7 +98,7 @@ public class ManagementService {
         public UserChangeDTO changeDataUser(int id, String newLogin, UserChangeDTO userChangeDTO) {
             try {
                 userDataRepository.changeLogin(id, newLogin);
-                return userChangeDTO;//todo
+                return userChangeDTO;
             } catch (Exception e) {
                 throw new RuntimeException("Error changing user data: " + e.getMessage());
             }

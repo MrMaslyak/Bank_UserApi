@@ -2,8 +2,8 @@ package com.example.MaslyakBank_client.advice;
 
 import com.example.MaslyakBank_client.dto.errorsDTOs.GenericErrorDTO;
 import com.example.MaslyakBank_client.dto.errorsDTOs.ValidationErrorDTO;
+import com.example.MaslyakBank_client.exceptions.AlreadyExistException;
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class ValidationExceptionHandler {
 
     @PostConstruct
     public void init() {
-        log.warn("⚠️✅ TODO: Передавать JSON вывод ошибки в формате errorCode: Integer; errorMessage: String; errorDetails?: String[]", ValidationExceptionHandler.class.getName() + ".java");
+        log.info("✅✅ TODO: Передавать JSON вывод ошибки в формате errorCode: Integer; errorMessage: String; errorDetails?: String[]", ValidationExceptionHandler.class.getName() + ".java");
     }
 
 
@@ -45,6 +45,16 @@ public class ValidationExceptionHandler {
         });
         ValidationErrorDTO response = new ValidationErrorDTO(HttpStatus.BAD_REQUEST.value(), "Validation error", errors);
         return ResponseEntity.badRequest().body(response);
+    }
+
+
+
+    @ExceptionHandler({AlreadyExistException.class})
+    public ResponseEntity<ValidationErrorDTO> handleValidationAlreadyExistException(AlreadyExistException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("Already exist", ex.getMessage());
+        ValidationErrorDTO response = new ValidationErrorDTO(HttpStatus.CONFLICT.value(), "Validation error", errors);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
 

@@ -37,7 +37,7 @@ public class AccountService {
 
     @PostConstruct
     public void init() {
-        log.warn("✅✅ TODO: ForI в методе getUsers должен заменить MapperClass", AccountService.class.getName() + ".java");
+        log.info("✅✅ TODO: ForI в методе getUsers должен заменить MapperClass", AccountService.class.getName() + ".java");
     }
 
     public List<UserBalanceDTO> getUserBalance(List<Integer> userIds) {
@@ -47,7 +47,7 @@ public class AccountService {
     public List<UserDataDTO> getUsers() {
         List<UserDataDTO> dtoList = new ArrayList<>();
         List<UserDataTable> usersList = userDataRepository.findAll();
-        for (UserDataTable user : usersList) {//todo
+        for (UserDataTable user : usersList) {
            UserDataDTO userDataDTO = userDataMapper.toUserDataDTO(user);
             dtoList.add(userDataDTO);
         }
