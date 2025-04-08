@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.9">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="4827" dy="2896" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3851" dy="2364" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -400,7 +400,7 @@
         <mxCell id="FyFoM1saeB9UCsdGW9vz-1" value="Backend(server)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-430.74" y="-524.19" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="FyFoM1saeB9UCsdGW9vz-5" value="ManagemantSystem&lt;div&gt;Controller&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="FyFoM1saeB9UCsdGW9vz-5" value="ManagemantSystem&lt;div&gt;Controller&lt;/div&gt;&lt;div&gt;/management&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-502.3" y="-467.43000000000006" width="100.5" height="100.5" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-10" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.backint_agent;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
@@ -817,16 +817,16 @@
         <mxCell id="FyFoM1saeB9UCsdGW9vz-206" value="PORT:5000" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#3399FF,var(--ge-dark-color, #121212));shadow=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-434.54999999999995" y="-494.19000000000005" width="119" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FyFoM1saeB9UCsdGW9vz-207" value="TransactionService" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="FyFoM1saeB9UCsdGW9vz-207" value="TransactionService&lt;div&gt;/transactions&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-389.99" y="-464.69000000000005" width="100.5" height="100.5" as="geometry" />
         </mxCell>
-        <mxCell id="FyFoM1saeB9UCsdGW9vz-209" value="DepositService" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="FyFoM1saeB9UCsdGW9vz-209" value="DepositService&lt;div&gt;/deposit&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-504.24" y="-359.44" width="100.5" height="100.5" as="geometry" />
         </mxCell>
-        <mxCell id="FyFoM1saeB9UCsdGW9vz-210" value="CurrencyExchange&lt;div&gt;Service&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="FyFoM1saeB9UCsdGW9vz-210" value="CurrencyExchange&lt;div&gt;Service&lt;/div&gt;&lt;div&gt;/exchenge&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-389.99" y="-345.43" width="100.5" height="100.5" as="geometry" />
         </mxCell>
-        <mxCell id="FyFoM1saeB9UCsdGW9vz-211" value="LogService" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="FyFoM1saeB9UCsdGW9vz-211" value="LogService&lt;div&gt;/log&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-297.06" y="-384.25" width="59.5" height="59.5" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-214" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.005;entryY=0.475;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="oeOgtYIjhjvIpxG6j6ra-10" target="oeOgtYIjhjvIpxG6j6ra-3">
