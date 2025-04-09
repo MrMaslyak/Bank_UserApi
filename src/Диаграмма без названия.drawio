@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.9">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="3082" dy="1946" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="4510" dy="2723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -425,13 +425,13 @@
           <mxGeometry x="1360" y="-670" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-23" value="Скачивание квитанций" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1664.9999999999998" y="-670" width="80" height="80" as="geometry" />
+          <mxGeometry x="1668.9999999999998" y="-670" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-24" value="Пользоваться кредитными деньгами" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="2015.25" y="-670" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-25" value="Открывать карточки (интернет, валютные)" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1825" y="-670" width="80" height="80" as="geometry" />
+          <mxGeometry x="1840" y="-670" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-27" value="Блокирование Счета" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1447.94" y="-280" width="80" height="80" as="geometry" />
@@ -482,7 +482,7 @@
           <mxGeometry x="1507" y="-550" width="110" height="110" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-44" value="Я как пользователь, &lt;b&gt;могу&lt;/b&gt; скачивать квитанции, &lt;b&gt;чтобы &lt;/b&gt;переслать кому то ее" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1650" y="-550" width="110" height="110" as="geometry" />
+          <mxGeometry x="1654" y="-550" width="110" height="110" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-45" value="Я как пользователь, &lt;b&gt;хочу&amp;nbsp;&lt;/b&gt;открывать новые банковские карточки,&amp;nbsp;&lt;b&gt;ч&lt;/b&gt;&lt;strong data-end=&quot;311&quot; data-start=&quot;302&quot;&gt;тобы&lt;/strong&gt; удобно управлять финансами, проводить онлайн-платежи или использовать разные валюты." style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1790" y="-550" width="150" height="150" as="geometry" />
@@ -521,22 +521,22 @@
           <mxGeometry x="2330" y="-160" width="145.12" height="145.12" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-64" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-54.93" y="-124" width="30" height="30" as="geometry" />
+          <mxGeometry x="-70" y="-123.49" width="30" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-65" value="" style="endArrow=classic;html=1;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="FyFoM1saeB9UCsdGW9vz-64" target="FyFoM1saeB9UCsdGW9vz-66" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-14.93" y="-88.5" as="sourcePoint" />
-            <mxPoint x="35.07" y="-109" as="targetPoint" />
+            <mxPoint x="-30" y="-87.99" as="sourcePoint" />
+            <mxPoint x="20" y="-108.49" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-66" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.devices.workstation_pc;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="39.57" y="-138.5" width="53" height="59" as="geometry" />
+          <mxGeometry x="24.5" y="-137.99" width="53" height="59" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-67" value="" style="whiteSpace=wrap;html=1;aspect=fixed;strokeColor=light-dark(#00994D,#FFFFFF);fillColor=light-dark(#66FF66,var(--ge-dark-color, #121212));" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="319.57" y="23.129999999999995" width="179.75" height="179.75" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-68" value="API Gateway (REST)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFF33,var(--ge-dark-color, #121212));shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="145.07" y="-123.49000000000001" width="119" height="29.99" as="geometry" />
+          <mxGeometry x="130" y="-122.98" width="119" height="29.99" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-69" value="Docker" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="374.45" y="31.50999999999999" width="60" height="30" as="geometry" />
@@ -738,8 +738,8 @@
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-115" value="" style="endArrow=classic;html=1;rounded=0;entryX=-0.019;entryY=0.45;entryDx=0;entryDy=0;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="FyFoM1saeB9UCsdGW9vz-66" target="FyFoM1saeB9UCsdGW9vz-68" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="88.07" y="-109.32440391929958" as="sourcePoint" />
-            <mxPoint x="125.07" y="-108.5" as="targetPoint" />
+            <mxPoint x="73" y="-108.81440391929958" as="sourcePoint" />
+            <mxPoint x="110" y="-107.99" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-116" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
@@ -770,7 +770,7 @@
           <mxGeometry x="350.01" y="16.5" width="110" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-123" value="" style="whiteSpace=wrap;html=1;aspect=fixed;strokeColor=light-dark(#00994D,#FFFFFF);fillColor=light-dark(#66FF66,var(--ge-dark-color, #121212));" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="319.51" y="-214" width="179.75" height="179.75" as="geometry" />
+          <mxGeometry x="319.51" y="-214.12" width="179.75" height="179.75" as="geometry" />
         </mxCell>
         <mxCell id="FyFoM1saeB9UCsdGW9vz-124" value="Backend(user)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="359.51" y="-220" width="100" height="30" as="geometry" />
